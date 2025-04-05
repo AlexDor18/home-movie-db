@@ -91,7 +91,15 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<mainClass>org.thro.sqs.homemoviedb.home_movie_db_backend.HomeMovieDbBackendApplication</mainClass>
 				</configuration>
+				<executions>
+    				<execution>
+        				<goals>
+            				<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
