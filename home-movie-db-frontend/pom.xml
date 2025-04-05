@@ -25,12 +25,22 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <phase>generate-resources</phase>
+                        <configuration>
+                            <nodeVersion>v22.14.0</nodeVersion>
+                            <installDirectory>target</installDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-project</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>packaging</phase>
+                        <configuration>
+                            <arguments>build</arguments>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <nodeVersion>v22.14.0</nodeVersion>
-                    <installDirectory>target</installDirectory>
-                </configuration>
             </plugin>
         </plugins>
     </build>
