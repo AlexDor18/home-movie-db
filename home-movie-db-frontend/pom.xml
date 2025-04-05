@@ -37,7 +37,7 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
-                        <phase>generate-resource</phase>
+                        <phase>generate-resources</phase>
                         <configuration>
                             <arguments>install</arguments>
                         </configuration>
