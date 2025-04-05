@@ -33,6 +33,16 @@
                         <phase>generate-resources</phase>
                     </execution>
                     <execution>
+                        <id>install packages</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resource</phase>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>build-project</id>
                         <goals>
                             <goal>npm</goal>
