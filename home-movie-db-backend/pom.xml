@@ -20,6 +20,16 @@
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+		<!-- Internal dependencies -->
+
+		<dependency>
+			<groupId>org.thro.sqs.homemoviedb</groupId>
+			<artifactId>home-movie-db-frontend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+
+		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -46,6 +56,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- other external dependencies -->
 	</dependencies>
 
 	<build>

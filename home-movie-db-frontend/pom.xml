@@ -4,8 +4,14 @@
                          http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+		<groupId>org.thro.sqs.homemoviedb</groupId>
+		<artifactId>home-movie-db</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
     <groupId>org.thro.sqs.homemoviedb</groupId>
-	<artifactId>home-movie-db-frontend</artifactId>
+    <artifactId>home-movie-db-frontend</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
@@ -17,7 +23,7 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.14.2</version>
+                <version>${eirslett.version}</version>
                 <executions>
                     <execution>
                         <id>install-node-and-npm</id>
@@ -25,22 +31,22 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <phase>generate-resources</phase>
-                        <configuration>
-                            <nodeVersion>v22.14.0</nodeVersion>
-                            <installDirectory>target</installDirectory>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>build-project</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
-                        <phase>packaging</phase>
+                        <phase>compile</phase>
                         <configuration>
-                            <arguments>build</arguments>
+                            <arguments>run build</arguments>
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <nodeVersion>v22.14.0</nodeVersion>
+                    <installDirectory>target</installDirectory>
+                </configuration>
             </plugin>
         </plugins>
     </build>
