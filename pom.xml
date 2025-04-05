@@ -22,6 +22,7 @@
     <maven.compiler.target>21</maven.compiler.target>
     <spring.version>3.4.4</spring.version>
     <maven.compiler.version>3.14.0</maven.compiler.version>
+    <maven.resources.version>3.2.0</maven.resources.version>
     <eirslett.version>1.15.1</eirslett.version>
   </properties>
 
@@ -39,6 +40,11 @@
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
         <version>${eirslett.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${maven.resources.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
