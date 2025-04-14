@@ -3,7 +3,7 @@ import { Header } from "../components/Header/Header";
 
 const Layout: React.FC = () => {
   return (
-    <div className="layout">
+    <div className="bg-[#F0EFFF]">
       <Header />
       <Outlet />
       <footer className="layout-footer">
