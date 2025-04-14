@@ -25,9 +25,6 @@
     <maven.resources.version>3.2.0</maven.resources.version>
     <eirslett.version>1.15.1</eirslett.version>
     <jacoco.version>0.8.13</jacoco.version>
-    <!-- SONARQUBE -->
-    <sonar.organization>alexdor18</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
 
   <dependencyManagement>
