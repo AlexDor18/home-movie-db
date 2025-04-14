@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
 @SpringBootTest
-public class PublicMoviesImplTest {
+class PublicMoviesImplTest {
 
     @InjectMocks
     private PublicMoviesImpl sut;
