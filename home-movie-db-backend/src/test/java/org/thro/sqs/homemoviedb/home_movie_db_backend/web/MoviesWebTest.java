@@ -16,7 +16,7 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Public
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
 @WebMvcTest(MoviesWeb.class)
-public class MoviesWebTest {
+class MoviesWebTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -25,7 +25,7 @@ public class MoviesWebTest {
     private PublicMovies publicMovies;
 
     @Test
-    public void allMoviesTest() throws Exception {    
+    void allMoviesTest() throws Exception {    
         Mockito.when(publicMovies.getAllMovies()).thenReturn(List.of(new MovieMessage(){{
             setId(1L);
             setTitle("Movie 1");
@@ -34,7 +34,7 @@ public class MoviesWebTest {
         }}));
         this.mockMvc.perform(get("/api/movies"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].id").value(1L));;
+            .andExpect(jsonPath("$[0].id").value(1L));
     }
 
 }
