@@ -12,11 +12,18 @@
 
     <groupId>org.thro.sqs.homemoviedb</groupId>
     <artifactId>home-movie-db-frontend</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <name>home-movie-db-frontend</name>
-  <description>Web application for movie database</description>
+    <name>home-movie-db-frontend</name>
+    <description>Web application for movie database</description>
+
+    <properties>
+        <sonar.sources>src/**/*</sonar.sources>
+        <sonar.sources.exclude>src/test/**/*</sonar.sources.exclude>
+        <sonar.tests>src/test/**/*.test.*</sonar.tests>
+        <sonar.javascript.lcov.reportPaths>/coverage/lcov.info</sonar.javascript.lcov.reportPaths>
+    </properties>
 
     <build>
         <plugins>
@@ -50,6 +57,16 @@
                         <phase>compile</phase>
                         <configuration>
                             <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>test</phase>
+                        <configuration>
+                            <arguments>run coverage</arguments>
                         </configuration>
                     </execution>
                 </executions>
