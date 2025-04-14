@@ -4,7 +4,7 @@
                          http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.thro.sqs.homemoviedb</groupId>
+  <groupId>org.thro.sqs.homemoviedb</groupId>
 	<artifactId>home-movie-db</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -24,6 +24,7 @@
     <maven.compiler.version>3.14.0</maven.compiler.version>
     <maven.resources.version>3.2.0</maven.resources.version>
     <eirslett.version>1.15.1</eirslett.version>
+    <jacoco.version>0.8.13</jacoco.version>
   </properties>
 
   <dependencyManagement>
@@ -46,6 +47,46 @@
         <artifactId>maven-resources-plugin</artifactId>
         <version>${maven.resources.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <profiles>
+    <profile>
+      <id>coverage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <formats>
+                    <format>XML</format>
+                  </formats>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
