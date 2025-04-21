@@ -13,7 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.PublicMovies;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 
 @WebMvcTest(MoviesWeb.class)
 class MoviesWebTest {
@@ -26,11 +26,10 @@ class MoviesWebTest {
 
     @Test
     void allMoviesTest() throws Exception {    
-        Mockito.when(publicMovies.getAllMovies()).thenReturn(List.of(new MovieMessage(){{
+        Mockito.when(publicMovies.getAllMovies()).thenReturn(List.of(new MovieDTO(){{
             setId(1L);
             setTitle("Movie 1");
             setOverview("Overview 1");
-            setGenres(List.of("Genre 1", "Genre 2"));
         }}));
         this.mockMvc.perform(get("/api/movies"))
             .andExpect(status().isOk())

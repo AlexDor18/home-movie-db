@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 
 @SpringBootTest
 class PublicMoviesImplTest {
@@ -16,7 +16,7 @@ class PublicMoviesImplTest {
 
     @Test
     void getAllMovies() {
-        final List<MovieMessage> result = this.sut.getAllMovies();
+        final List<MovieDTO> result = this.sut.getAllMovies();
         Assertions.assertEquals(1, result.size());
     }
 }
