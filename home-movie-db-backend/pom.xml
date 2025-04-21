@@ -63,6 +63,10 @@
 			<artifactId>maven-resources-plugin</artifactId>
 			<version>${maven.resources.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -77,6 +81,11 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</path>
+						<path>
+                    		<groupId>org.mapstruct</groupId>
+                        	<artifactId>mapstruct-processor</artifactId>
+                        	<version>${org.mapstruct.version}</version>
+                    	</path>
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>

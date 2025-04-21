@@ -25,6 +25,7 @@
     <maven.resources.version>3.2.0</maven.resources.version>
     <eirslett.version>1.15.1</eirslett.version>
     <jacoco.version>0.8.13</jacoco.version>
+    <org.mapstruct.version>1.6.3</org.mapstruct.version>
     <!-- SONARQUBE -->
     <sonar.organization>alexdor18</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -55,6 +56,11 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${jacoco.version}</version>
       </dependency>
+      <dependency>
+        	<groupId>org.mapstruct</groupId>
+        	<artifactId>mapstruct</artifactId>
+        	<version>${org.mapstruct.version}</version>
+    	</dependency>
     </dependencies>
   </dependencyManagement>
 
