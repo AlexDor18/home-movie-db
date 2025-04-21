@@ -1,20 +1,13 @@
-package org.thro.sqs.homemoviedb.home_movie_db_backend.web.models;
-
-import java.util.List;
+package org.thro.sqs.homemoviedb.home_movie_db_backend.business.models;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class MovieMessage {
+public class MovieDTO {
     private Long id;
-
     private String title;
-    
     private String overview;
-
-    private List<String> genres;
-
     private String thumbnailUrl;
 }
