@@ -3,7 +3,7 @@ import OverviewTable from '../components/OverviewTable/OverviewTable';
 
 const HomePage: React.FC = () => {
   return (
-    <div className="my-component">
+    <div>
       <OverviewTable />
     </div>
   );
