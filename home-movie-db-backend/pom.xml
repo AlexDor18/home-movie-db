@@ -18,6 +18,7 @@
 
 	<properties>
 		<java.version>21</java.version>
+		<sonar.exclusions>**/*DTO.java,**/*Message.java</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<!-- Internal dependencies -->
