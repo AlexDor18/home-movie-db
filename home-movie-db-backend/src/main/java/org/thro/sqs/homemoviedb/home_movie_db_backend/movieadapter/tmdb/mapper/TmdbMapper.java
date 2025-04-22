@@ -1,4 +1,4 @@
-package org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb;
+package org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
