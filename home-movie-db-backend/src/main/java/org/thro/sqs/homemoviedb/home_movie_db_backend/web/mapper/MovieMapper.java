@@ -1,4 +1,4 @@
-package org.thro.sqs.homemoviedb.home_movie_db_backend.web;
+package org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper;
 
 import java.util.List;
 

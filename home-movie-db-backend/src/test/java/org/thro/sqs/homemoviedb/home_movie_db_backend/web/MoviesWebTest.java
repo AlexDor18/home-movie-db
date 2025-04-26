@@ -13,6 +13,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.PublicMovies;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
 @ExtendWith(MockitoExtension.class)

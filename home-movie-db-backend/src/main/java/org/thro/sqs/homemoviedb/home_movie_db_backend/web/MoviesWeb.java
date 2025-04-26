@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.PublicMovies;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
 @RestController
