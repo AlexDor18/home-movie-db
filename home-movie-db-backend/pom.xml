@@ -18,6 +18,7 @@
 
 	<properties>
 		<java.version>21</java.version>
+		<sonar.exclusions>**/*DTO.java,**/*Message.java</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<!-- Internal dependencies -->
@@ -63,6 +64,10 @@
 			<artifactId>maven-resources-plugin</artifactId>
 			<version>${maven.resources.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -77,6 +82,11 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</path>
+						<path>
+                    		<groupId>org.mapstruct</groupId>
+                        	<artifactId>mapstruct-processor</artifactId>
+                        	<version>${org.mapstruct.version}</version>
+                    	</path>
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>

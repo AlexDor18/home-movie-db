@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.PublicMovies;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
 @RestController
@@ -13,13 +14,15 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 public class MoviesWeb {
     
     private PublicMovies publicMovies;
+    private MovieMapper mapper;
 
-    public MoviesWeb(PublicMovies publicMovies) {
+    public MoviesWeb(PublicMovies publicMovies, MovieMapper movieMapper) {
         this.publicMovies = publicMovies;
+        this.mapper = movieMapper;
     }
 
     @GetMapping("/movies")
     public List<MovieMessage> movies() {
-        return publicMovies.getAllMovies();
+        return this.mapper.mapToMovieMessage(publicMovies.getAllMovies());
     }
 }

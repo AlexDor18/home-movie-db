@@ -1,40 +1,45 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.web;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.PublicMovies;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
-@WebMvcTest(MoviesWeb.class)
+@ExtendWith(MockitoExtension.class)
 class MoviesWebTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    @InjectMocks
+    private MoviesWeb sut;
 
-    @MockitoBean
+    @Mock
     private PublicMovies publicMovies;
 
+    @Spy
+    private MovieMapper movieMapper = Mappers.getMapper(MovieMapper.class);
+
     @Test
-    void allMoviesTest() throws Exception {    
-        Mockito.when(publicMovies.getAllMovies()).thenReturn(List.of(new MovieMessage(){{
+    void allMoviesTest() {    
+        Mockito.when(publicMovies.getAllMovies()).thenReturn(List.of(new MovieDTO(){{
             setId(1L);
             setTitle("Movie 1");
             setOverview("Overview 1");
-            setGenres(List.of("Genre 1", "Genre 2"));
         }}));
-        this.mockMvc.perform(get("/api/movies"))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].id").value(1L));
+        
+        List<MovieMessage> result = sut.movies();
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertEquals("Movie 1", result.get(0).getTitle());
+        Assertions.assertEquals("Overview 1", result.get(0).getOverview());
     }
 
 }

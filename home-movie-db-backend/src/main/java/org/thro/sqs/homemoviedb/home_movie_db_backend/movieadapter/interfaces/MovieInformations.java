@@ -1,0 +1,12 @@
+package org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces;
+
+import java.util.List;
+
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
+
+public interface MovieInformations {
+
+    MovieDTO getMovieInformationsById(Long movieId);
+
+    List<MovieDTO> getMoviesInformationsById(List<Long> movieIds);
+}
