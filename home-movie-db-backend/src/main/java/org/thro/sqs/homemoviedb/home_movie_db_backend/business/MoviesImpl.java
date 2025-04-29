@@ -8,11 +8,11 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
 
 @Service
-public class PublicMoviesImpl implements Movies {
+public class MoviesImpl implements Movies {
 
     private MovieInformations movieInformations;
 
-    public PublicMoviesImpl(MovieInformations informations){
+    public MoviesImpl(MovieInformations informations){
         movieInformations = informations;
     }
 
