@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.PublicMovies;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
@@ -23,7 +23,7 @@ class MoviesWebTest {
     private MoviesWeb sut;
 
     @Mock
-    private PublicMovies publicMovies;
+    private Movies publicMovies;
 
     @Spy
     private MovieMapper movieMapper = Mappers.getMapper(MovieMapper.class);
