@@ -35,7 +35,7 @@ public class MovieEntity {
     private String originalTitle; 
 
     @ManyToMany
-    private List<GenresEntity> genres;
+    private List<GenresEntity> genres; // NOSONAR: Entity mapping is done by hibernate
 
     @ManyToMany(mappedBy = "movies")
     private List<UserEntity> ownedByUser;
