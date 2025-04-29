@@ -14,10 +14,10 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
 
 @ExtendWith(MockitoExtension.class)
-class PublicMoviesImplTest {
+class MoviesImplTest {
 
     @InjectMocks
-    private PublicMoviesImpl sut;
+    private MoviesImpl sut;
 
     @Mock
     private MovieInformations movieInformationsMock;

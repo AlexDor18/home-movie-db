@@ -30,5 +30,4 @@ public class TmdbMovieInformations implements MovieInformations{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getMoviesInformationsById'");
     }
-
 }
