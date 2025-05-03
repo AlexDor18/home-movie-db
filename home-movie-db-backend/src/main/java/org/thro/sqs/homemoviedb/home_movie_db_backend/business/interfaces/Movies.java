@@ -9,4 +9,6 @@ public interface Movies {
     public List<MovieDTO> getAllMovies();
 
     public MovieDTO getMovieById(Long movieId);
+
+    public MovieDTO saveMovieById(Long id);
 }
