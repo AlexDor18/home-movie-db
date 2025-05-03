@@ -22,4 +22,9 @@ public class MoviesImpl implements Movies {
 
         return List.of(result);
     }
+
+    @Override
+    public MovieDTO getMovieById(Long movieId) {
+        return this.movieInformations.getMovieInformationsById(movieId);
+    }
 }
