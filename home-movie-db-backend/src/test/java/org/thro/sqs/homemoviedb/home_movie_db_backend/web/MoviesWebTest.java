@@ -51,7 +51,7 @@ class MoviesWebTest {
             setOverview("Overview 1");
         }});
 
-        MovieMessage result = sut.getMethodName("1");
+        MovieMessage result = sut.getMovieById("1");
         Assertions.assertEquals(1L, result.getId());
         Assertions.assertEquals("Movie 1", result.getTitle());
         Assertions.assertEquals("Overview 1", result.getOverview());

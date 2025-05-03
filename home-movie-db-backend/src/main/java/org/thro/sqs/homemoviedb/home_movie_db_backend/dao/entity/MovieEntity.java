@@ -19,6 +19,7 @@ public class MovieEntity {
     
     private String title;
     
+    @Column(columnDefinition = "TEXT")
     private String overview;
     
     @Column(name = "thumbnail_uri")

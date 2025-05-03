@@ -37,7 +37,7 @@ public class MoviesWeb {
         return this.mapper.mapToMovieMessage(movies.getMovieById(Long.parseLong(id)));
     }
 
-    @PostMapping("/movie/{id}")
+    @PostMapping("/movies/{id}")
     public MovieMessage postMovieById(@PathVariable("id") String id) {
         final MovieDTO savedMovie =  this.movies.saveMovieById(Long.parseLong(id));
         

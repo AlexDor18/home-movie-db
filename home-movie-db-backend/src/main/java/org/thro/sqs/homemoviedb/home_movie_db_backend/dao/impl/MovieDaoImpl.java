@@ -2,12 +2,14 @@ package org.thro.sqs.homemoviedb.home_movie_db_backend.dao.impl;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.entity.MovieEntity;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDao;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.MovieRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.mapper.MovieDaoMapper;
 
+@Repository
 public class MovieDaoImpl implements MovieDao{
 
     private MovieRepository movieRepository;
