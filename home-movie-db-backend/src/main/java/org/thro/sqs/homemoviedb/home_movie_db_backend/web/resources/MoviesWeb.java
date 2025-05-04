@@ -29,7 +29,7 @@ public class MoviesWeb {
 
     @GetMapping("/movies")
     public List<MovieMessage> movies() {
-        return this.mapper.mapToMovieMessage(movies.getAllMovies());
+        return this.mapper.mapToMovieMessage(movies.getAllUserMovies());
     }
 
     @GetMapping("/movies/{id}")

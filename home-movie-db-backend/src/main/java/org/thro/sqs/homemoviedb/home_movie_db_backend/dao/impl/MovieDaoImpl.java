@@ -1,23 +1,29 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.entity.MovieEntity;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.entity.UserEntity;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDao;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.MovieRepository;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.UserRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.mapper.MovieDaoMapper;
 
 @Repository
 public class MovieDaoImpl implements MovieDao{
 
     private MovieRepository movieRepository;
+    private UserRepository userRepository;
 
     private MovieDaoMapper movieMapper;
 
-    public MovieDaoImpl(MovieRepository movieRepository, MovieDaoMapper movieMapper) {
+    public MovieDaoImpl(MovieRepository movieRepository, UserRepository userRepository, MovieDaoMapper movieMapper) {
         this.movieRepository = movieRepository;
+        this.userRepository = userRepository;
         this.movieMapper = movieMapper;
     }
 
@@ -35,6 +41,17 @@ public class MovieDaoImpl implements MovieDao{
     @Override
     public void saveMovie(MovieDTO movie) {
         MovieEntity newMovie = this.movieMapper.toMovieEntity(movie);
-        movieRepository.save(newMovie);
+        movieRepository.saveAndFlush(newMovie);
+    }
+
+    @Override
+    public List<MovieDTO> getAllMoviesForUser(Long userId) {
+        UserEntity user = userRepository.findById(userId).orElse(null);
+
+        if(user == null) {
+            return new ArrayList<>();
+        }
+
+        return this.movieMapper.toMovieDTOList(user.getMovies());
     }
 }
