@@ -1,6 +1,5 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +11,7 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDa
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.MovieRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.UserRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.mapper.MovieDaoMapper;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserNotFoundException;
 
 @Repository
@@ -33,7 +33,7 @@ public class MovieDaoImpl implements MovieDao{
         final Optional<MovieEntity> movie = movieRepository.findById(id);
 
         if(movie.isEmpty()) {
-            return null;
+            throw new MovieNotFoundException("Movie with id " + id + " not found");
         }
 
         return this.movieMapper.toMovieDTO(movie.get());
@@ -65,7 +65,7 @@ public class MovieDaoImpl implements MovieDao{
         UserEntity user = userRepository.findById(userId).orElse(null);
 
         if(user == null) {
-            return new ArrayList<>();
+            throw new UserNotFoundException("User with id " + userId + " not found");
         }
 
         return this.movieMapper.toMovieDTOList(user.getMovies());

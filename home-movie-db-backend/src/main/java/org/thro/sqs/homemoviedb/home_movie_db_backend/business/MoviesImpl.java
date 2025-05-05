@@ -44,7 +44,7 @@ public class MoviesImpl implements Movies {
     }
 
     @Override
-    public MovieDTO saveMovieById(Long movieId) throws MovieNotFoundException, UserNotFoundException {
+    public MovieDTO saveMovieById(Long movieId) {
         final MovieDTO movieToSave = this.getMovieById(movieId);
 
         if(movieToSave == null) {
