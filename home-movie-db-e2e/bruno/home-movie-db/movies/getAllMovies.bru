@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: {{host}}/api/movies
+  url: {{host}}/api/movies?language=de-DE
   body: none
   auth: none
+}
+
+params:query {
+  language: de-DE
 }

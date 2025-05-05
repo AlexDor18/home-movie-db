@@ -27,11 +27,11 @@ class TmdbMovieInformationsTest {
 
     @Test
     void getMovieInformationsByIdTest() {
-        Mockito.when(tmdbHttpClientMock.get("/movie/1", TmdbMovieMessage.class)).thenReturn(new TmdbMovieMessage(){{
+        Mockito.when(tmdbHttpClientMock.get("/movie/1?language=de-DE", TmdbMovieMessage.class)).thenReturn(new TmdbMovieMessage(){{
             setId(1);
             setOverview("overview");
             setTitle("title");
-            setPoster_path("thumbnailUrl");
+            setPoster_path("/thumbnailUrl");
         }});
 
         MovieDTO result = sut.getMovieInformationsById(1L);
@@ -39,7 +39,7 @@ class TmdbMovieInformationsTest {
         Assertions.assertEquals(1, result.getId());
         Assertions.assertEquals("overview", result.getOverview());
         Assertions.assertEquals("title", result.getTitle());
-        Assertions.assertEquals("thumbnailUrl", result.getThumbnailUrl());
+        Assertions.assertEquals("https://media.themoviedb.org/t/p/w220_and_h330_face/thumbnailUrl", result.getThumbnailUrl());
     }
 
 }

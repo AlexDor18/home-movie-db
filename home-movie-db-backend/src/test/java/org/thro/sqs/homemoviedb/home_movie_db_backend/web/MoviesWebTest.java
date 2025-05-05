@@ -13,6 +13,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.resources.MoviesWeb;
@@ -55,6 +56,13 @@ class MoviesWebTest {
         Assertions.assertEquals(1L, result.getId());
         Assertions.assertEquals("Movie 1", result.getTitle());
         Assertions.assertEquals("Overview 1", result.getOverview());
+    }
+
+    @Test
+    void getMovieByIdNotFoundTest() {
+        Mockito.when(publicMovies.getMovieById(1L)).thenReturn(null);
+
+        Assertions.assertThrows(MovieNotFoundException.class, () -> sut.getMovieById("1"));
     }
 
     @Test

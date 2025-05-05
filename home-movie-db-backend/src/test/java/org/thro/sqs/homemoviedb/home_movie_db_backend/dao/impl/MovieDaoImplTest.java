@@ -20,7 +20,6 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.entity.UserEntity;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.MovieRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.UserRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.mapper.MovieDaoMapper;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserNotFoundException;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,7 +55,8 @@ class MovieDaoImplTest {
     void getMovieByIdNotFoundTest() {
         Mockito.when(this.movieRepositoryMock.findById(12L)).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(MovieNotFoundException.class, () -> this.sut.getMovieById(12L));
+        final MovieDTO result = this.sut.getMovieById(12L);
+        Assertions.assertNull(result);
         Mockito.verifyNoMoreInteractions(this.movieDaoMapperMock);
     }
 

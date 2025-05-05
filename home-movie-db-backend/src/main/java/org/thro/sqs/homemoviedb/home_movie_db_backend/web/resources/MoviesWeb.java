@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.ApiConfig;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
@@ -37,7 +38,13 @@ public class MoviesWeb {
 
     @GetMapping("/movies/{id}")
     public MovieMessage getMovieById(@PathVariable("id") String id) {
-        return this.mapper.mapToMovieMessage(movies.getMovieById(Long.parseLong(id)));
+        final MovieDTO result = movies.getMovieById(Long.parseLong(id));
+
+        if(result == null){
+            throw new MovieNotFoundException("Movie with id " + id + " not found");
+        }
+
+        return this.mapper.mapToMovieMessage(result);
     }
 
     @PostMapping("/movies/{id}")

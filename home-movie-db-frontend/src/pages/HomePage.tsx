@@ -1,10 +1,13 @@
 import React from 'react';
 import OverviewTable from '../components/OverviewTable/OverviewTable';
+import { useGetAllMoviesQuery } from '../redux/api/movieApi';
 
 const HomePage: React.FC = () => {
+  const {data} = useGetAllMoviesQuery();
+
   return (
     <div>
-      <OverviewTable />
+      <OverviewTable movies={data || []} />
     </div>
   );
 };

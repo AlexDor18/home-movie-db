@@ -17,5 +17,14 @@ export default defineConfig({
     },
     setupFiles: ["./src/tests/setup.ts"],
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://172.17.0.1:8080',
+        changeOrigin: true,
+      },
+    },
+  },
+
   plugins: [react(), tailwindcss()],
 })

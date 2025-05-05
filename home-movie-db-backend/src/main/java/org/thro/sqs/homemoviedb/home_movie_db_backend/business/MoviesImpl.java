@@ -7,7 +7,6 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDao;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +45,8 @@ public class MoviesImpl implements Movies {
     @Override
     public MovieDTO saveMovieById(Long movieId) {
         final MovieDTO movieToSave = this.getMovieById(movieId);
+
+        log.info("Movie {} retived with value {}!", movieId, movieToSave);
 
         if(movieToSave == null) {
             log.warn("Movie {} not found!", movieId);

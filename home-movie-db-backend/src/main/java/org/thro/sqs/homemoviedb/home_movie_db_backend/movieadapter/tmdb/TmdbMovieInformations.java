@@ -21,7 +21,7 @@ public class TmdbMovieInformations implements MovieInformations{
 
     @Override
     public MovieDTO getMovieInformationsById(Long movieId) {
-        TmdbMovieMessage result = this.tmdbHttpClient.get("/movie/"+movieId, TmdbMovieMessage.class);
+        TmdbMovieMessage result = this.tmdbHttpClient.get("/movie/"+movieId+"?language=de-DE", TmdbMovieMessage.class);
         return this.tmdbMapper.mapToMovieDTO(result);
     }
 

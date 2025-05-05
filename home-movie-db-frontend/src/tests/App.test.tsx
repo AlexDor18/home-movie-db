@@ -1,10 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import App from '../App';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 describe('App', () => {
     it('renders the App component', () => {
-        render(<App />);
+        render(
+        <Provider store={store}>
+        <App />
+        </Provider>);
         
         expect(screen.getByText(/Home Movie DB/)).toBeInTheDocument();
     });

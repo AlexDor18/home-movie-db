@@ -11,7 +11,6 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDa
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.MovieRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.UserRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.mapper.MovieDaoMapper;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserNotFoundException;
 
 @Repository
@@ -33,7 +32,7 @@ public class MovieDaoImpl implements MovieDao{
         final Optional<MovieEntity> movie = movieRepository.findById(id);
 
         if(movie.isEmpty()) {
-            throw new MovieNotFoundException("Movie with id " + id + " not found");
+            return null;
         }
 
         return this.movieMapper.toMovieDTO(movie.get());
