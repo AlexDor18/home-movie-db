@@ -52,7 +52,7 @@ public class MoviesImpl implements Movies {
             throw new MovieNotFoundException("Movie with id " + movieId + " not found");
         }
 
-        this.movieDao.saveMovieForUser(movieToSave, 2L);
+        this.movieDao.saveMovieForUser(movieToSave, 1L);
         return this.movieDao.getMovieById(movieId);
     }
 }
