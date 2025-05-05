@@ -20,7 +20,6 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.entity.UserEntity;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.MovieRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.UserRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.mapper.MovieDaoMapper;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserNotFoundException;
 
 @ExtendWith(MockitoExtension.class)
