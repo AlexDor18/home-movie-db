@@ -9,5 +9,8 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.T
 public interface TmdbMapper {
 
     @Mapping(source = "poster_path", target="thumbnailUrl")
+    @Mapping(source = "original_language", target="originalLanguage")
+    @Mapping(source = "original_title", target="originalTitle")
+    @Mapping(source = "release_date", target="releaseDate")
     MovieDTO mapToMovieDTO(TmdbMovieMessage tmdbMovieMessage);
 }

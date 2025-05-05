@@ -14,4 +14,12 @@ public interface MovieMapper {
     MovieMessage mapToMovieMessage(MovieDTO movie);
 
     List<MovieMessage> mapToMovieMessage(List<MovieDTO> movies);
+
+    @Mapping(target = "adult", ignore = true)
+    @Mapping(target = "originalLanguage", ignore = true)
+    @Mapping(target = "originalTitle", ignore = true)
+    @Mapping(target = "releaseDate", ignore = true)
+    MovieDTO mapToMovieDTO(MovieMessage movieMessage);
+
+    List<MovieDTO> mapToMovieDTO(List<MovieMessage> movieMessages);
 }

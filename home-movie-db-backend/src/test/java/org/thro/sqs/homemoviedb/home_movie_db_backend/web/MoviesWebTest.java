@@ -15,6 +15,7 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.web.resources.MoviesWeb;
 
 @ExtendWith(MockitoExtension.class)
 class MoviesWebTest {
@@ -30,7 +31,7 @@ class MoviesWebTest {
 
     @Test
     void allMoviesTest() {    
-        Mockito.when(publicMovies.getAllMovies()).thenReturn(List.of(new MovieDTO(){{
+        Mockito.when(publicMovies.getAllUserMovies()).thenReturn(List.of(new MovieDTO(){{
             setId(1L);
             setTitle("Movie 1");
             setOverview("Overview 1");
@@ -42,4 +43,31 @@ class MoviesWebTest {
         Assertions.assertEquals("Overview 1", result.get(0).getOverview());
     }
 
+    @Test
+    void getMovieByIdTest() {
+        Mockito.when(publicMovies.getMovieById(1L)).thenReturn(new MovieDTO(){{
+            setId(1L);
+            setTitle("Movie 1");
+            setOverview("Overview 1");
+        }});
+
+        MovieMessage result = sut.getMovieById("1");
+        Assertions.assertEquals(1L, result.getId());
+        Assertions.assertEquals("Movie 1", result.getTitle());
+        Assertions.assertEquals("Overview 1", result.getOverview());
+    }
+
+    @Test
+    void saveMovieByIdTest() {
+        Mockito.when(publicMovies.saveMovieById(1L)).thenReturn(new MovieDTO(){{
+            setId(1L);
+            setTitle("Movie 1");
+            setOverview("Overview 1");
+        }});
+
+        MovieMessage result = sut.postMovieById("1");
+        Assertions.assertEquals(1L, result.getId());
+        Assertions.assertEquals("Movie 1", result.getTitle());
+        Assertions.assertEquals("Overview 1", result.getOverview());
+    }
 }

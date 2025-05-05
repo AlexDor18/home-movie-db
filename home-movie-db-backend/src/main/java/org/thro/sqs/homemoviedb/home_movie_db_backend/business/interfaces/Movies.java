@@ -6,5 +6,9 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 
 public interface Movies {
 
-    public List<MovieDTO> getAllMovies();
+    public List<MovieDTO> getAllUserMovies();
+
+    public MovieDTO getMovieById(Long movieId);
+
+    public MovieDTO saveMovieById(Long id);
 }
