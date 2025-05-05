@@ -1,4 +1,4 @@
-import { MovieDto } from "../../models/Movie";
+import { MovieDto } from "../../../models/Movie";
 
 export const testData : MovieDto[] = [
     {
