@@ -13,10 +13,13 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.web.ApiConfig;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 
 @RestController
 @RequestMapping(ApiConfig.BASE_PATH)
+@Slf4j
 public class MoviesWeb {
     
     private Movies movies;
@@ -43,5 +46,4 @@ public class MoviesWeb {
         
         return this.mapper.mapToMovieMessage(savedMovie);
     }
-    
 }

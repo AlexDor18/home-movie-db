@@ -47,6 +47,11 @@ public class MovieDaoImpl implements MovieDao{
             throw new UserNotFoundException("User with id " + userId + " not found");
         }
 
+        final MovieEntity dbMovie = movieRepository.findById(movie.getId()).orElse(null);
+        if(dbMovie == null) {
+            movieRepository.saveAndFlush(this.movieMapper.toMovieEntity(movie));
+        }
+
         final List<MovieEntity> movies = user.getMovies();
         movies.add(this.movieMapper.toMovieEntity(movie));
 

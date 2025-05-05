@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDao;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
 
@@ -43,15 +44,15 @@ public class MoviesImpl implements Movies {
     }
 
     @Override
-    public MovieDTO saveMovieById(Long movieId) {
+    public MovieDTO saveMovieById(Long movieId) throws MovieNotFoundException, UserNotFoundException {
         final MovieDTO movieToSave = this.getMovieById(movieId);
-        try {
-            this.movieDao.saveMovieForUser(movieToSave, 1L);
-            return this.movieDao.getMovieById(movieId);
-        } catch (UserNotFoundException  e) {
-            log.error(e.getMessage());
-            return null;
+
+        if(movieToSave == null) {
+            log.warn("Movie {} not found!", movieId);
+            throw new MovieNotFoundException("Movie with id " + movieId + " not found");
         }
 
+        this.movieDao.saveMovieForUser(movieToSave, 2L);
+        return this.movieDao.getMovieById(movieId);
     }
 }
