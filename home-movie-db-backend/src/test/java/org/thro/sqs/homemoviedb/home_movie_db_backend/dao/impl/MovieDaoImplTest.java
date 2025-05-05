@@ -126,6 +126,38 @@ class MovieDaoImplTest {
     }
 
     @Test
+    void saveMovieForUserNotFoundInDbTest() {
+        MovieEntity movie1 = new MovieEntity(){{
+            setId(123L);
+            setOverview("unittest");
+            setTitle("unittest");
+            setThumbnailUri("");
+        }};
+
+        List<MovieEntity> movies = new ArrayList<>();
+        movies.add(movie1);
+
+        UserEntity user1 = new UserEntity(){{
+            setId(1L);
+            setMovies(movies);
+        }};
+
+        Mockito.when(this.userRepositoryMock.findById(1L)).thenReturn(Optional.of(user1));
+
+        Mockito.when(this.movieRepositoryMock.findById(2L)).thenReturn(Optional.empty());
+
+        this.sut.saveMovieForUser(new MovieDTO(){{
+            setId(2L);
+            setOverview("unittest2");
+            setTitle("unittest2");
+            setThumbnailUrl("");
+        }}, 1L);
+
+        Mockito.verify(this.movieRepositoryMock).saveAndFlush(ArgumentMatchers.any(MovieEntity.class));
+        Mockito.verify(this.userRepositoryMock).saveAndFlush(ArgumentMatchers.any(UserEntity.class));
+    }
+
+    @Test
     void saveMovieForUserNotFoundTest() {
         Mockito.when(this.userRepositoryMock.findById(1L)).thenReturn(Optional.empty());    
 
