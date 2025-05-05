@@ -6,14 +6,16 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { MovieDto } from '../../models/Movie'
 import { columns } from './columns'
-import { testData } from './testData'
 
-const OverviewTable = () => {
-  const data = testData
+interface OverviewTableProps {
+  movies: MovieDto[]
+}
 
+const OverviewTable = (props: OverviewTableProps) => {
   const table = useReactTable({
-    data,
+    data: props.movies,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -23,7 +25,7 @@ const OverviewTable = () => {
   })
 
   return (
-    <table className='mx-auto my-6 border-[#BBBBBB] border-solid border-[1px]'>
+    <table className='mx-auto my-6 border-[#BBBBBB] border-solid border-[1px] max-w-[1650px]'>
       <thead>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
@@ -44,7 +46,7 @@ const OverviewTable = () => {
         {table.getRowModel().rows.map(row => (
           <tr key={row.id} className='odd:bg-white even:bg-[#65C576]/16'>
             {row.getVisibleCells().map(cell => (
-              <td key={cell.id} className='text-center px-2 py-1 border-r-[#BBBBBB] border-r-[1px] border-solid last:border-r-0'>
+              <td key={cell.id} className='text-center px-3 py-6 border-r-[#BBBBBB] border-r-[1px] border-solid last:border-r-0 min-w-32'>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}

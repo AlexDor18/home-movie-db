@@ -6,4 +6,12 @@ interface MovieDto {
     thumbnailUrl: string
 }
 
-export type { MovieDto };
+interface MovieMessage {
+    id: number;
+    title: string;
+    overview: string;
+    genres: string[];
+    thumbnailUrl: string
+}
+
+export type { MovieDto, MovieMessage };

@@ -5,7 +5,7 @@ export const columns : ColumnDef<MovieDto>[] = [
     {
         accessorKey: "thumbnailUrl",
         header: "",
-        cell: info => <img src={info.getValue() as string} alt="Thumbnail" className="w-[100px] h-[150px]" />
+        cell: info => <img src={info.getValue() as string} alt="Thumbnail" className="" />
     },
     {
         accessorKey: "title",
