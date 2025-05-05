@@ -56,7 +56,8 @@ class MovieDaoImplTest {
     void getMovieByIdNotFoundTest() {
         Mockito.when(this.movieRepositoryMock.findById(12L)).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(MovieNotFoundException.class, () -> this.sut.getMovieById(12L));
+        final MovieDTO result = this.sut.getMovieById(12L);
+        Assertions.assertNull(result);
         Mockito.verifyNoMoreInteractions(this.movieDaoMapperMock);
     }
 
