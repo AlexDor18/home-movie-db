@@ -1,18 +1,23 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import OverviewTable from '../../../components/OverviewTable/OverviewTable';
+import { testData } from './testData';
 
 describe('OverviewTable', () => {
   it('renders the OverviewTable component', () => {
-    render(<OverviewTable />);
+    const movies = testData;
+    
+    render(<OverviewTable movies={movies}/>);
     
     expect(screen.getByText(/Title/)).toBeInTheDocument();
     expect(screen.getByText(/Beschreibung/)).toBeInTheDocument();
   });
 
-    it('renders data inserted in the table', () => {
-        render(<OverviewTable />);
+  it('renders data inserted in the table', () => {
+    const movies = testData;    
 
-        expect(screen.getByText(/The Shawshank Redemption/)).toBeInTheDocument();
-    });
+    render(<OverviewTable movies={movies}/>);
+
+    expect(screen.getByText(/The Shawshank Redemption/)).toBeInTheDocument();
+  });
 });
