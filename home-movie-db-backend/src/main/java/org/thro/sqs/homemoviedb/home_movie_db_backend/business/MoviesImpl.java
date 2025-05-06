@@ -56,4 +56,9 @@ public class MoviesImpl implements Movies {
         this.movieDao.saveMovieForUser(movieToSave, 1L);
         return this.movieDao.getMovieById(movieId);
     }
+
+    @Override
+    public List<MovieDTO> searchMovieByQuery(String query, boolean adult) {
+        return this.movieInformations.searchMovieByQuery(query, adult);
+    }
 }

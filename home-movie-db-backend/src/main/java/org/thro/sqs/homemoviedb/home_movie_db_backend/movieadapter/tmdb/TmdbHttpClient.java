@@ -1,5 +1,7 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
@@ -31,6 +33,16 @@ public class TmdbHttpClient {
      * @throws HttpClientErrorException if the API responded with an error
      */
     public <T extends Object> T get(String uri, Class<T> responseClass) {
+        try {
+            return restClient.get().uri(uri).retrieve().body(responseClass);
+        } catch(HttpClientErrorException err){
+            log.error(uri, err);
+            throw err;
+        }
+        
+    }
+    
+    public <T extends Object> List<T> getList(String uri, Class<T> responseClass) {
         try {
             return restClient.get().uri(uri).retrieve().body(responseClass);
         } catch(HttpClientErrorException err){
