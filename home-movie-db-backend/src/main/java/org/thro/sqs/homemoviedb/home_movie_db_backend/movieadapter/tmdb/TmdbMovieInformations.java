@@ -1,5 +1,7 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -27,14 +29,10 @@ public class TmdbMovieInformations implements MovieInformations{
     }
 
     @Override
-    public List<MovieDTO> getMoviesInformationsById(List<Long> movieIds) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMoviesInformationsById'");
-    }
-
-    @Override
     public List<MovieDTO> searchMovieByQuery(String query, boolean adult) {
-        TmdbMovieMessageList result = this.tmdbHttpClient.get("/search/movie?language=de-DE&query="+query+"&include_adult="+adult, TmdbMovieMessageList.class);   
+        String sanitizedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
+
+        TmdbMovieMessageList result = this.tmdbHttpClient.get("/search/movie?language=de-DE&query="+sanitizedQuery+"&include_adult="+adult, TmdbMovieMessageList.class);   
         return this.tmdbMapper.mapToMovieDTO(result.getResults());
     }
 }

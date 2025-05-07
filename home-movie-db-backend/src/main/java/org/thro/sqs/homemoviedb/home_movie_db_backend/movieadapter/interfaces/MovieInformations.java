@@ -8,7 +8,5 @@ public interface MovieInformations {
 
     MovieDTO getMovieInformationsById(Long movieId);
 
-    List<MovieDTO> getMoviesInformationsById(List<Long> movieIds);
-
     List<MovieDTO> searchMovieByQuery(String query, boolean adult);
 }
