@@ -41,14 +41,4 @@ public class TmdbHttpClient {
         }
         
     }
-    
-    public <T extends Object> List<T> getList(String uri, Class<T> responseClass) {
-        try {
-            return restClient.get().uri(uri).retrieve().body(responseClass);
-        } catch(HttpClientErrorException err){
-            log.error(uri, err);
-            throw err;
-        }
-        
-    }
 }

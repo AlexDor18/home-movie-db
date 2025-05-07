@@ -8,6 +8,8 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.mapper.TmdbMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessage;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessageList;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
 @Service
 public class TmdbMovieInformations implements MovieInformations{
@@ -34,7 +36,7 @@ public class TmdbMovieInformations implements MovieInformations{
 
     @Override
     public List<MovieDTO> searchMovieByQuery(String query, boolean adult) {
-        List<TmdbMovieMessage> result = this.tmdbHttpClient.get("/search/movie?language=de-DE&query="+query+"&include_adult="+adult, TmdbMovieMessage.class);   
-        return this.tmdbMapper.mapToMovieDTO(result);
+        TmdbMovieMessageList result = this.tmdbHttpClient.get("/search/movie?language=de-DE&query="+query+"&include_adult="+adult, TmdbMovieMessageList.class);   
+        return this.tmdbMapper.mapToMovieDTO(result.getResults());
     }
 }
