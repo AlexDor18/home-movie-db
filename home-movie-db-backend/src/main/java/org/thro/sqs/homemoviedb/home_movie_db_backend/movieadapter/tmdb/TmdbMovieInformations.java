@@ -1,6 +1,5 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.Mo
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.mapper.TmdbMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessageList;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
 @Service
 public class TmdbMovieInformations implements MovieInformations{
