@@ -14,8 +14,14 @@ export const movieApi = createApi({
             }),
 
             transformResponse: (response:  MovieMessage[] ) => { return MovieMapper.toMovieDtoList(response);}
+        }),
+        postAddMoveById: build.mutation<void, string>({
+            query: (movieId) => ({
+                url: "/"+movieId,
+                method: "POST",
+            })
         })
     })
 });
 
-export const { useGetAllMoviesQuery } = movieApi;
+export const { useGetAllMoviesQuery, usePostAddMoveByIdMutation } = movieApi;
