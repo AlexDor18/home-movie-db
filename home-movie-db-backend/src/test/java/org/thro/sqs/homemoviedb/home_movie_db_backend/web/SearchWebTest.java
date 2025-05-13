@@ -9,6 +9,7 @@ import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
@@ -22,7 +23,7 @@ class SearchWebTest {
     @Mock
     private Movies movies;
 
-    @Mock
+    @Spy
     private MovieMapper mapper = Mappers.getMapper(MovieMapper.class);
 
     @InjectMocks
