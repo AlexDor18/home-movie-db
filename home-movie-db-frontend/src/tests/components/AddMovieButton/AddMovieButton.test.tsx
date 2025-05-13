@@ -1,7 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
-import AddMovieButton from '../../../components/AddMovieButton/AddMovieButton';
+import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { describe, expect, it } from 'vitest';
+import AddMovieButton from '../../../components/AddMovieButton/AddMovieButton';
 import { store } from '../../../redux/store';
 
 describe('AddMovieButton', () => {
