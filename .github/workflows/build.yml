@@ -6,11 +6,11 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Build project
 
 on:
   push:
-    branches: [ "feature/**", "development", "main" ]
+    branches: [ "development", "main" ]
   pull_request:
     branches: [ "development", "main" ]
 
