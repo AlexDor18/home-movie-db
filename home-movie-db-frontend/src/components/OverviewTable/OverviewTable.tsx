@@ -1,4 +1,5 @@
 import {
+  ColumnDef,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -6,22 +7,20 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { MovieDto } from '../../models/Movie'
-import { columns } from './columns'
 
-interface OverviewTableProps {
-  movies: MovieDto[]
+interface OverviewTableProps<T> {
+  data: T[]
+  columns: ColumnDef<T>[]
 }
 
-const OverviewTable = (props: OverviewTableProps) => {
+function OverviewTable<T> (props: Readonly<OverviewTableProps<T>>) {
   const table = useReactTable({
-    data: props.movies,
-    columns,
+    data: props.data,
+    columns: props.columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    debugTable: true,
   })
 
   return (

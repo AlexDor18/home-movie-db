@@ -1,5 +1,7 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
@@ -15,6 +17,8 @@ public interface TmdbMapper {
     @Mapping(source = "original_title", target="originalTitle")
     @Mapping(source = "release_date", target="releaseDate")
     MovieDTO mapToMovieDTO(TmdbMovieMessage tmdbMovieMessage);
+
+    List<MovieDTO> mapToMovieDTO(List<TmdbMovieMessage> tmdbMovieMessages);
 
     @Named("mapToThumbnailUrl")
     default String mapToThumbnailUrl(String posterPath) {
