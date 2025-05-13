@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TmdbMovieMessageList {
+public class TmdbMovieListMessage {
 
     private List<TmdbMovieMessage> results;
 }

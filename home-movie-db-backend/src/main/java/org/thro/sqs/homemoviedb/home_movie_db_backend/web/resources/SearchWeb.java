@@ -27,7 +27,7 @@ public class SearchWeb {
     }
 
     @GetMapping("/search/movies")
-    public List<MovieMessage> getMethodName(@RequestParam("query") String query, @RequestParam("adult") boolean adult) {
+    public List<MovieMessage> getSearchMovie(@RequestParam("query") String query, @RequestParam("adult") boolean adult) {
         List<MovieDTO> foundMovies = this.movies.searchMovieByQuery(query, adult);
 
         return this.mapper.mapToMovieMessage(foundMovies);

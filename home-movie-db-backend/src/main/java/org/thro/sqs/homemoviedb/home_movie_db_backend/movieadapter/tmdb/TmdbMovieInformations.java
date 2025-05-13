@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.mapper.TmdbMapper;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieListMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessage;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessageList;
 
 @Service
 public class TmdbMovieInformations implements MovieInformations{
@@ -32,7 +32,7 @@ public class TmdbMovieInformations implements MovieInformations{
     public List<MovieDTO> searchMovieByQuery(String query, boolean adult) {
         String sanitizedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
 
-        TmdbMovieMessageList result = this.tmdbHttpClient.get("/search/movie?language=de-DE&query="+sanitizedQuery+"&include_adult="+adult, TmdbMovieMessageList.class);   
+        TmdbMovieListMessage result = this.tmdbHttpClient.get("/search/movie?language=de-DE&query="+sanitizedQuery+"&include_adult="+adult, TmdbMovieListMessage.class);   
         return this.tmdbMapper.mapToMovieDTO(result.getResults());
     }
 }

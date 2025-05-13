@@ -94,4 +94,18 @@ class MoviesImplTest {
 
         Assertions.assertThrows(MovieNotFoundException.class, () -> this.sut.saveMovieById(1L));
     }
+
+    @Test
+    void searchMovieByQueryTest(){
+        Mockito.when(this.movieInformationsMock.searchMovieByQuery("query", true)).thenReturn(List.of(new MovieDTO(){{
+            setId(1L);
+            setOverview("unittest");
+            setTitle("unittest");
+            setThumbnailUrl("");
+        }}));   
+
+        final List<MovieDTO> result = this.sut.searchMovieByQuery("query", true);
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertEquals("unittest", result.get(0).getTitle());
+    }
 }
