@@ -8,10 +8,13 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     const handleLogin = () => {
+        const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+
         fetch("/auth/login", {
             method: "POST",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-XSRF-TOKEN": csrfToken
             },
             body: new URLSearchParams({
                 username: user,
