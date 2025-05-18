@@ -23,6 +23,10 @@ export default defineConfig({
         target: 'http://172.17.0.1:8080',
         changeOrigin: true,
       },
+      '/auth': {
+        target: 'http://172.17.0.1:8080',
+        changeOrigin: true,
+      },
     },
   },
 

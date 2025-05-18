@@ -4,7 +4,7 @@ import { Login } from "../../models/Login";
 export const loginApi = createApi({
     reducerPath: "loginApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "/login",
+        baseUrl: "/auth/login",
     }),
     endpoints: (build) => ({
         login: build.mutation<void, Login>({
@@ -16,8 +16,8 @@ export const loginApi = createApi({
                     password: creds.password
                 }),
                 headers: {
-                    "Content-Type": "application/www-form-urlencoded"
-                }
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
             })
         })
     }),
