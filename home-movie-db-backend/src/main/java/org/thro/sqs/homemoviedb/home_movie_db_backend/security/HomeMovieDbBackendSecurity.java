@@ -32,7 +32,7 @@ public class HomeMovieDbBackendSecurity {
             .loginProcessingUrl("/auth/login")
             .defaultSuccessUrl("/home", true)
 			.permitAll())
-            .authorizeHttpRequests((authorize) -> {
+            .authorizeHttpRequests(authorize -> {
                 authorize
 				.requestMatchers("/api/**")
                 .authenticated();

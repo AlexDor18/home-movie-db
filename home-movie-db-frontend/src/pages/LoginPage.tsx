@@ -8,7 +8,7 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     const handleLogin = () => {
-        const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+        const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, '$1')
 
         fetch("/auth/login", {
             method: "POST",
