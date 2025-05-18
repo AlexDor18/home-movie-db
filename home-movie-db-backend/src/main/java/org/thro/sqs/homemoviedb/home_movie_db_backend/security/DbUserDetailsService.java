@@ -29,12 +29,9 @@ public class DbUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User with username " + username + " not found");
         }
 
-        UserDetails userDetails = User.builder()
+        return User.builder()
             .username(user.getUsername())
             .password("{noop}"+user.getPassword())
-            .roles("USER")
             .build();
-
-        return userDetails;
     }
 }

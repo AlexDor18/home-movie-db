@@ -32,7 +32,7 @@ class MoviesWebTest {
 
     @Test
     void allMoviesTest() {    
-        Mockito.when(publicMovies.getAllUserMovies()).thenReturn(List.of(new MovieDTO(){{
+        Mockito.when(publicMovies.getAllUserMovies("testuser")).thenReturn(List.of(new MovieDTO(){{
             setId(1L);
             setTitle("Movie 1");
             setOverview("Overview 1");

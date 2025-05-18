@@ -6,7 +6,7 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 
 public interface Movies {
 
-    public List<MovieDTO> getAllUserMovies();
+    public List<MovieDTO> getAllUserMovies(String username);
 
     public MovieDTO getMovieById(Long movieId);
 

@@ -11,6 +11,7 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.ApiConfig;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.web.AuthManager;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
@@ -33,7 +34,9 @@ public class MoviesWeb {
 
     @GetMapping("/movies")
     public List<MovieMessage> movies() {
-        return this.mapper.mapToMovieMessage(movies.getAllUserMovies());
+        String username = AuthManager.getUsername();
+
+        return this.mapper.mapToMovieMessage(movies.getAllUserMovies(username));
     }
 
     @GetMapping("/movies/{id}")

@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.UserDto;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDao;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.UserDao;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
 
@@ -16,17 +18,20 @@ import lombok.extern.slf4j.Slf4j;
 public class MoviesImpl implements Movies {
 
     private MovieInformations movieInformations;
-
     private MovieDao movieDao;
+    private UserDao userDao;
 
-    public MoviesImpl(MovieInformations informations, MovieDao movieDaoBean) {
+    public MoviesImpl(MovieInformations informations, MovieDao movieDaoBean, UserDao userDaoBean) {
         movieInformations = informations;
         movieDao = movieDaoBean;
+        userDao = userDaoBean;
     }
 
     @Override
-    public List<MovieDTO> getAllUserMovies() {
-        return this.movieDao.getAllMoviesForUser(1L);
+    public List<MovieDTO> getAllUserMovies(String username) {
+        UserDto user = userDao.getUserByUsername(username);
+
+        return this.movieDao.getAllMoviesForUser(user.getId());
     }
 
     @Override

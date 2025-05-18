@@ -18,6 +18,7 @@ export const loginApi = createApi({
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
+                redirect: "follow"
             })
         })
     }),

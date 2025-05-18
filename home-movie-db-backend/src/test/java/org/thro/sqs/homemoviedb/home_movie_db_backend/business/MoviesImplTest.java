@@ -35,7 +35,7 @@ class MoviesImplTest {
             setThumbnailUrl("");
         }}));
 
-        final List<MovieDTO> result = this.sut.getAllUserMovies();
+        final List<MovieDTO> result = this.sut.getAllUserMovies("testuser");
         Assertions.assertEquals(1, result.size());
         Assertions.assertEquals("unittest", result.getFirst().getTitle());
     }
