@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
 const LoginPage = () => {
     const [user, setUser] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<boolean>(false);
 
+    const {register, handleSubmit } = useForm();
     const navigate = useNavigate()
 
     const handleLogin = () => {
@@ -21,6 +24,12 @@ const LoginPage = () => {
                 password: password
             })
         }).then((res) => {
+            const url = new URL(res.url);
+            if(url.searchParams.get("error") === ""){
+                console.error("Invalid auth credentials");
+                setError(true);
+            }
+
             if(res.redirected){
                 const url = new URL(res.url);
                 navigate(url.pathname);
@@ -30,13 +39,11 @@ const LoginPage = () => {
 
     return (
         <div className="flex-1 flex justify-center items-center">
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                handleLogin();
-            }} className="mx-auto max-w-md p-8 bg-white rounded-lg shadow-lg">
+            <form onSubmit={handleSubmit(handleLogin)} className="mx-auto max-w-md p-8 bg-white rounded-lg shadow-lg">
             <label className="block text-gray-700 font-bold mb-2">
                 Username:{" "}
                 <input 
+                    {...register("username", {required: true})}
                     type="text" 
                     placeholder="Username" 
                     value={user} 
@@ -48,6 +55,7 @@ const LoginPage = () => {
             <label className="block text-gray-700 font-bold mb-2">
                 Password:{" "}
                 <input 
+                    {...register("password", { required: true })}
                     type="password" 
                     placeholder="Password" 
                     value={password} 
@@ -55,6 +63,7 @@ const LoginPage = () => {
                     className="bg-white border-solid border-[1px] border-[#ccc] w-full py-1.5 px-2" 
                 />
             </label>
+            {error && <p className="text-red-500">Invalid auth credentials</p>}
             <br />
             <button 
                 type="submit" 

@@ -28,7 +28,7 @@ public class HomeMovieDbBackendSecurity {
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .csrfTokenRequestHandler(new SpaCsrfTokenRequestHandler()) )
             .formLogin(form -> form
-			.loginPage("/login")
+			.loginPage("/")
             .loginProcessingUrl("/auth/login")
             .defaultSuccessUrl("/home", true)
 			.permitAll())
