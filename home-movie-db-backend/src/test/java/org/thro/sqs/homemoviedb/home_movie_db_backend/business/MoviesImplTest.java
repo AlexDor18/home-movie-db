@@ -10,7 +10,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.UserDto;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDao;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.UserDao;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
 
@@ -26,8 +28,15 @@ class MoviesImplTest {
     @Mock
     private MovieInformations movieInformationsMock;
 
+    @Mock
+    private UserDao userDaoMock;
+
     @Test
     void getAllMovies() {
+        Mockito.when(this.userDaoMock.getUserByUsername("testuser")).thenReturn(new UserDto(){{
+            setId(1L);
+            setUsername("testuser");
+        }});
         Mockito.when(this.movieDaoMock.getAllMoviesForUser(1L)).thenReturn(List.of(new MovieDTO(){{
             setId(1L);
             setOverview("unittest");

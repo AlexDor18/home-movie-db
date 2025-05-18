@@ -31,7 +31,9 @@ class MoviesWebTest {
     private MovieMapper movieMapper = Mappers.getMapper(MovieMapper.class);
 
     @Test
-    void allMoviesTest() {    
+    void allMoviesTest() {   
+        Mockito.mockStatic(AuthManager.class);
+        Mockito.when(AuthManager.getUsername()).thenReturn("testuser");
         Mockito.when(publicMovies.getAllUserMovies("testuser")).thenReturn(List.of(new MovieDTO(){{
             setId(1L);
             setTitle("Movie 1");
