@@ -1,5 +1,7 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.business;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.UserService;
@@ -23,9 +25,15 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(16);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        log.info("Password: " + user.getPassword());
-
         return this.userDao.createNewUser(user);
+    }
+
+    @Override
+    public UserDto getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        final String username = authentication.getName();
+        
+        return this.userDao.getUserByUsername(username);
     }
 
 }
