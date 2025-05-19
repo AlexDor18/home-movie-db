@@ -3,6 +3,7 @@ package org.thro.sqs.homemoviedb.home_movie_db_backend.dao.entity;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQuery;
@@ -16,6 +17,7 @@ import lombok.Setter;
 public class UserEntity {
 
     @Id
+    @GeneratedValue
     private Long id;
     
     private String username;

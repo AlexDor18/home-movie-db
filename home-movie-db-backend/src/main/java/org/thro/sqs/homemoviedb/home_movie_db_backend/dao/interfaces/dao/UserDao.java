@@ -6,4 +6,5 @@ public interface UserDao {
 
     UserDto getUserByUsername(String username);
 
+    UserDto createNewUser(UserDto user);
 }
