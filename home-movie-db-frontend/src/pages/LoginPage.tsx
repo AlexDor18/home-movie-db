@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 const LoginPage = () => {
     const [user, setUser] = useState<string>("");
@@ -38,7 +38,11 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="flex-1 flex justify-center items-center">
+        <div className="flex-1 flex justify-center flex-col items-center my-6">
+            <h2 className="text-3xl font-bold mb-4 flex-block my-8">Willkommen in der Home Movie DB</h2>
+
+            <p>Noch kein Nutzer vorhanden? <NavLink to="/signup">Hier Registrieren</NavLink></p>
+
             <form onSubmit={handleSubmit(handleLogin)} className="mx-auto max-w-md p-8 bg-white rounded-lg shadow-lg">
             <label className="block text-gray-700 font-bold mb-2">
                 Username:{" "}
