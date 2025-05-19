@@ -46,4 +46,20 @@ class UserDaoImplTest {
         Assertions.assertThrows(UserNotFoundException.class, () -> this.sut.getUserByUsername("testuser"));
     }
 
+    @Test
+    void createNewUserTest() {
+        UserDto user = new UserDto(){{
+            setUsername("test");
+            setPassword("test");
+        }};
+
+        Mockito.when(this.userRepositoryMock.saveAndFlush(Mockito.any(UserEntity.class))).thenReturn(new UserEntity(){{
+            setId(1L);
+            setUsername("test");
+        }});
+
+        final UserDto result = this.sut.createNewUser(user);
+        Assertions.assertEquals(1L, result.getId());
+        Assertions.assertEquals("test", result.getUsername());
+    }
 }
