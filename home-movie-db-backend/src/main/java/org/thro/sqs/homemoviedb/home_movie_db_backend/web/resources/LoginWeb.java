@@ -32,7 +32,7 @@ public class LoginWeb {
     }
 
     @PostMapping("/auth/signup")
-    public UserMessage postMethodName(@RequestBody UserMessage user) {
+    public UserMessage signupUser(@RequestBody UserMessage user) {
         UserDto newUser = this.userService.createNewUser(this.userMapper.mapToUserDto(user));
         if(newUser != null) {
             return this.userMapper.mapToUserMessage(newUser);
