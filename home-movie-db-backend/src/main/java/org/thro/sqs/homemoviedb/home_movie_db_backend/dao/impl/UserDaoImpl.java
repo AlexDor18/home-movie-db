@@ -27,6 +27,12 @@ public class UserDaoImpl implements UserDao {
             throw new UserNotFoundException("User with username " + username + " not found");
         }
 
-        return mapper.mapToUserDto(user);
+        return mapper.mapToUserDtoWithoutPassword(user);
+    }
+
+    @Override
+    public UserDto createNewUser(UserDto user) {
+        final UserEntity newUser = this.mapper.mapToUserEntity(user);
+        return this.mapper.mapToUserDtoWithoutPassword(this.userRepository.saveAndFlush(newUser));
     }
 }

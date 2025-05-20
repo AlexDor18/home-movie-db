@@ -32,7 +32,7 @@ class UserDetailsServiceTest {
         UserDetails user = this.sut.loadUserByUsername("testuser");
     
         Assertions.assertEquals("testuser", user.getUsername());
-        Assertions.assertEquals("{noop}password", user.getPassword());
+        Assertions.assertEquals("{bcrypt}password", user.getPassword());
     }
 
     @Test

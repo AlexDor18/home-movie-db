@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage"
 import NotFoundPage from "./pages/NotFoundPage"
 import SearchPage from "./pages/SearchPage"
 import HomePage from "./pages/HomePage"
+import SignupPage from "./pages/SignupPage"
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}> 
           <Route index element={<LoginPage />} />
+          <Route path='signup' element={<SignupPage />} />
           <Route path='home' element={<HomePage />} />
           <Route path='search' element={<SearchPage />} />
           <Route path='*' element={<NotFoundPage />} />

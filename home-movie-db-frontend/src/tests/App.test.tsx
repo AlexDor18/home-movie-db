@@ -11,6 +11,6 @@ describe('App', () => {
         <App />
         </Provider>);
         
-        expect(screen.getByText(/Home Movie DB/)).toBeInTheDocument();
+        expect(screen.getByText(/Willkommen/)).toBeInTheDocument();
     });
 });

@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.UserService;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.UserDto;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDao;
@@ -27,6 +28,9 @@ class MoviesImplTest {
 
     @Mock
     private MovieInformations movieInformationsMock;
+
+    @Mock
+    private UserService userServiceMock;
 
     @Mock
     private UserDao userDaoMock;
@@ -88,6 +92,10 @@ class MoviesImplTest {
             setThumbnailUrl("");
         }};
 
+        Mockito.when(this.userServiceMock.getAuthenticatedUser()).thenReturn(new UserDto(){{
+            setId(1L);
+            setUsername("testuser");
+        }});
         Mockito.when(this.movieDaoMock.getMovieById(1L)).thenReturn(demoMovie).thenReturn(demoMovie);
 
         final MovieDTO result = this.sut.saveMovieById(1L);

@@ -31,7 +31,7 @@ public class DbUserDetailsService implements UserDetailsService {
 
         return User.builder()
             .username(user.getUsername())
-            .password("{noop}"+user.getPassword())
+            .password("{bcrypt}"+user.getPassword())
             .build();
     }
 }

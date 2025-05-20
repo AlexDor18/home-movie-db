@@ -3,4 +3,11 @@ interface Login {
     password: string;
 }
 
-export type { Login }
+interface NewUser {
+    prename: string;
+    surname: string;
+    username: string;
+    password: string;
+}
+
+export type { Login, NewUser }

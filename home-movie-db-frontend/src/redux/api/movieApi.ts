@@ -19,6 +19,9 @@ export const movieApi = createApi({
             query: (movieId) => ({
                 url: "/"+movieId,
                 method: "POST",
+                headers: {
+                    "X-XSRF-TOKEN": document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, '$1')
+                }
             })
         })
     })
