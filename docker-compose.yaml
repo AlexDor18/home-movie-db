@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
     environment:
       TMDB_API_KEY: INSERT API KEY HERE 
-      DB_USER: Add username key
-      DB_PASSWORD: Add Password Key
+      DB_USER: homeMovieDb  
+      DB_PASSWORD: homeMovieDb
     ports:
       - "8080:8080"
     depends_on:
@@ -18,10 +18,10 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: Add username key
-      POSTGRES_PASSWORD: Add Password Key
+      POSTGRES_USER: homeMovieDb
+      POSTGRES_PASSWORD: homeMovieDb
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      test: ["CMD-SHELL", "pg_isready", "-U", "homeMovieDb"]
       interval: 30s
       timeout: 60s
       retries: 5
