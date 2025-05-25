@@ -70,5 +70,21 @@ jobs:
         with:
           version: latest
       - name: run docker compose
-        run: docker compose up
-
+        run: docker compose up -d
+      - name: Wait for Webserver to be reachable
+        run: |
+          echo "Waiting for webserver to be reachable..."
+          for i in {1..30}; do
+            if curl -sSf http://localhost:8080 > /dev/null; then
+              echo "Webserver is reachable."
+              exit 0
+            fi
+            echo "Webserver not yet reachable, retrying in 2s..."
+            sleep 2
+          done
+          echo "Webserver failed to become reachable."
+          docker compose logs
+          exit 1
+      - name: Tear down Docker Compose
+        if: always()
+        run: docker compose down
