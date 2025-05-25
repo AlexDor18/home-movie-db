@@ -75,7 +75,7 @@ jobs:
         run: |
           echo "Waiting for webserver to be reachable..."
           for i in {1..30}; do
-            if curl -sSf http://localhost:8080 > /dev/null; then
+            if curl -sSf http://localhost:8080/actuator/health > /dev/null; then
               echo "Webserver is reachable."
               exit 0
             fi
