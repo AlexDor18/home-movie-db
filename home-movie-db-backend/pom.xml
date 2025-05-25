@@ -102,6 +102,9 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring.version}</version>
 				<configuration>
+            		<profiles>
+                		<profile>${spring.profiles.active}</profile>
+            		</profiles>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -142,4 +145,21 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>dev</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<spring.profiles.active>prod</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
 </project>
