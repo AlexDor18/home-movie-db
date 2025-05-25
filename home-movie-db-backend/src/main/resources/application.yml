@@ -1,0 +1,29 @@
+spring:
+    application:
+        name: home-movie-db
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true    
+tmdb:
+    apiKey: ${TMDB_API_KEY}
+---
+spring:
+    config:
+        activate:
+            on-profile: dev
+    datasource:
+        url: jdbc:postgresql://localhost:3307/homeMovieDb 
+        username: homeMovieDb
+        password: asdfg-01
+
+---
+spring:
+    config:
+        activate: 
+            on-profile: prod
+    datasource:
+        url: jdbc:postgresql://home-movie-db-db-1:5432/homeMovieDb 
+        username: ${DB_USER}
+        password: ${DB_PASSWORD}
+

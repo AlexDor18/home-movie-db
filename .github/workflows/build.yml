@@ -59,3 +59,33 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B install -Pcoverage org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=AlexDor18_home-movie-db
+  docker:
+    name: Test docker compose
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup docker-compose
+        uses: docker/setup-compose-action@v1
+        with:
+          version: latest
+      - name: run docker compose
+        run: | 
+          docker compose up -d
+      - name: Wait for Webserver to be reachable
+        run: |
+          echo "Waiting for webserver to be reachable...."
+          for i in {1..30}; do
+            if curl -sSf http://localhost:8080/actuator/health > /dev/null; then
+              echo "Webserver is reachable."
+              exit 0
+            fi
+            echo "Webserver not yet reachable, retrying in 2s..."
+            sleep 2
+          done
+          echo "Webserver failed to become reachable."
+          docker compose logs
+          exit 1
+      - name: Tear down Docker Compose
+        if: always()
+        run: docker compose down
