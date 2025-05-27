@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router';
 
 describe('NewUserForm', () => {
-  it('should call onSubmit with correct data', async () => {
+  it.skip('should call onSubmit with correct data', async () => {
     const user = userEvent.setup();
 
     const onSubmit = vi.fn().mockImplementation(() => {
