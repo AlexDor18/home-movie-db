@@ -100,5 +100,4 @@ class IntegrationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(0)));
     }
-
 }
