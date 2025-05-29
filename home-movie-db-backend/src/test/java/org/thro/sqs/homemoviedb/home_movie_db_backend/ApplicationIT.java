@@ -39,11 +39,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Testcontainers
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = HomeMovieDbBackendApplication.class)
 @ActiveProfiles(value = "test")
 @MockServerTest
 @Slf4j
-class IntegrationTest {
+class ApplicationIT {
 
     @SuppressWarnings("resource")
     @Container
