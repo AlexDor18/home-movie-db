@@ -14,7 +14,7 @@ spring:
         activate:
             on-profile: test
 tmdb:
-    apiUrl: https://localhost:${wiremock.port}
+    apiUrl: http://localhost:${mockServerPort}
 
 ---
 spring:

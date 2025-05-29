@@ -95,10 +95,9 @@
 			<artifactId>mapstruct</artifactId>
 		</dependency>
 		<dependency>
-  			<groupId>org.wiremock</groupId>
-  			<artifactId>wiremock</artifactId>
-  			<version>${wiremock.version}</version>
-  			<scope>test</scope>
+		    <groupId>org.mock-server</groupId>
+		    <artifactId>mockserver-spring-test-listener-no-dependencies</artifactId>
+		    <version>5.14.0</version>
 		</dependency>
 	</dependencies>
 
