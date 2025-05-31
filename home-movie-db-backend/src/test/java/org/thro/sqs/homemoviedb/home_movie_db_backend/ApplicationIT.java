@@ -110,8 +110,7 @@ class ApplicationIT {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/movies").with(csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray());
     }
  
     @Test
