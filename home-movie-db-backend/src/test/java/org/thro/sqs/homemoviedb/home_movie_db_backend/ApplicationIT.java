@@ -198,6 +198,59 @@ class ApplicationIT {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)));
-
     }
+
+    @Test
+    @WithUserDetails("default_user")
+    @SneakyThrows
+    void testAddMovie(){
+        TmdbMovieMessage starWarsEpisodeIV = new TmdbMovieMessage();
+        starWarsEpisodeIV.setAdult(false);
+        starWarsEpisodeIV.setBackdrop_path("/path/to/starwars1/backdrop.jpg");
+        starWarsEpisodeIV.setBudget(20000000);
+        starWarsEpisodeIV.setGenres(new ArrayList<>());
+        starWarsEpisodeIV.setHomepage("https://www.starwars.com");
+        starWarsEpisodeIV.setId(11);
+        starWarsEpisodeIV.setImdb_id("tt0076759");
+        starWarsEpisodeIV.setOriginal_language("en");
+        starWarsEpisodeIV.setOriginal_title("Star Wars: Episode IV - A New Hope");
+        starWarsEpisodeIV.setOverview("In a galaxy far, far away...");
+        starWarsEpisodeIV.setPopularity(10.0);
+        starWarsEpisodeIV.setPoster_path("/path/to/starwars1/poster.jpg");
+        starWarsEpisodeIV.setProduction_companies(new ArrayList<>());
+        starWarsEpisodeIV.setProduction_countries(new ArrayList<>());
+        starWarsEpisodeIV.setRelease_date("1977-05-25");
+        starWarsEpisodeIV.setRevenue(100000000);
+        starWarsEpisodeIV.setRuntime(121);
+        starWarsEpisodeIV.setSpoken_languages(new ArrayList<>());
+        starWarsEpisodeIV.setStatus("Released");
+        starWarsEpisodeIV.setTagline("May the Force be with you.");
+        starWarsEpisodeIV.setTitle("Star Wars: Episode IV - A New Hope");
+        starWarsEpisodeIV.setVideo(false);
+        starWarsEpisodeIV.setVote_average(8.1);
+        starWarsEpisodeIV.setVote_count(1000);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        mockServerClient
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/movie/11")
+                                .withQueryStringParameter("language", "de-DE")
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withContentType(org.mockserver.model.MediaType.APPLICATION_JSON)
+                                .withBody(objectMapper.writeValueAsString(starWarsEpisodeIV))
+                );
+
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/movies/11").with(csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Star Wars: Episode IV - A New Hope"));
+    }
+
 }

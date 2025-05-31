@@ -31,11 +31,11 @@ CREATE TABLE genres_entity (
 -- Create many-to-many relationship tables
 
 CREATE TABLE user_entity_movies (
-  user_entity_id BIGINT NOT NULL,
-  movie_entity_id BIGINT NOT NULL,
-  PRIMARY KEY (user_entity_id, movie_entity_id),
-  FOREIGN KEY (user_entity_id) REFERENCES user_entity(id),
-  FOREIGN KEY (movie_entity_id) REFERENCES movie_entity(id)
+  owned_by_user_id BIGINT NOT NULL,
+  movies_id BIGINT NOT NULL,
+  PRIMARY KEY (owned_by_user_id, movies_id),
+  FOREIGN KEY (owned_by_user_id) REFERENCES user_entity(id),
+  FOREIGN KEY (movies_id) REFERENCES movie_entity(id)
 );
 
 CREATE TABLE movie_entity_genres (
