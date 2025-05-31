@@ -19,7 +19,7 @@ public class TmdbHttpClient {
 
         log.info(config.getApiKey());
 
-        restClient = RestClient.builder().baseUrl("https://api.themoviedb.org/3").defaultHeader("Authorization", "Bearer " + configuration.getApiKey()).defaultHeader("Content-Type", "application/json").build();
+        restClient = RestClient.builder().baseUrl(configuration.getApiUrl()).defaultHeader("Authorization", "Bearer " + configuration.getApiKey()).defaultHeader("Content-Type", "application/json").build();
     }
 
     /**
