@@ -24,12 +24,12 @@ function OverviewTable<T> (props: Readonly<OverviewTableProps<T>>) {
   })
 
   return (
-    <table className='mx-auto my-6 border-[#BBBBBB] border-solid border-[1px] max-w-[1650px]'>
+    <table className='mx-auto mb-6  border-[#BBBBBB] border-solid border-[1px] max-w-[1650px]'>
       <thead>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map(header => (
-              <th key={header.id} className='bg-[#65C576] border-r-black border-r-[1px] border-solid last:border-r-0'>
+              <th key={header.id} className='bg-[#65C576] border-r-black border-r-[1px] border-solid last:border-r-0 py-2'>
                 {header.isPlaceholder
                   ? null
                   : flexRender(
