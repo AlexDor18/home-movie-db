@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router';
 import LoginPage from '../../pages/LoginPage';
 
 describe('LoginPage', () => {
-  it.skip('renders the LoginPage component', () => {
+  it('renders the LoginPage component', () => {
     render(
       <MemoryRouter initialEntries={['/login']}>
         <LoginPage />

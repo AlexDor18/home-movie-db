@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 
 describe('App', () => {
-    it.skip('renders the App component', () => {
+    it('renders the App component', () => {
         render(
         <Provider store={store}>
         <App />
