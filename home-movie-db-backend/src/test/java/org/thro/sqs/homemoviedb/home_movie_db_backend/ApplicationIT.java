@@ -112,6 +112,18 @@ class ApplicationIT {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray());
     }
+
+    
+    @Test
+    @WithUserDetails("default_user")
+    @SneakyThrows
+    void testUserEndpoint(){
+        // Test the user endpoint
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user").with(csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("default_user"));
+    }
  
     @Test
     @WithUserDetails("default_user")
