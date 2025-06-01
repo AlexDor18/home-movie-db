@@ -1,7 +1,11 @@
-import { useGetUserQuery } from "../../redux/api/userApi";
+import { UserDto } from "../../models/User";
 
-const UserInfo = () => {
-    const { data: user } = useGetUserQuery();
+interface UserInfoProps {
+    user: UserDto | undefined
+}
+
+const UserInfo = (props: UserInfoProps) => {
+    const user = props.user;
 
     if(user === undefined){
         return <></>;

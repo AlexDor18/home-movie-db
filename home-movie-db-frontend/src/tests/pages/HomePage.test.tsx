@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import HomePage from '../../pages/HomePage';
 
 describe('HomePage', () => {
-  it.skip('renders the homepage component', () => {
+  it('renders the homepage component', () => {
 
     vi.mock("../../redux/api/movieApi", () => ({
       useGetAllMoviesQuery: vi.fn().mockImplementation(() => ({
