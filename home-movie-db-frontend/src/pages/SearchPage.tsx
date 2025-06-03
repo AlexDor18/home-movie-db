@@ -6,7 +6,7 @@ import { useLazyGetSearchMoviesQuery } from "../redux/api/searchApi";
 
 const SearchPage = () => {
 
-    const [trigger, result,] = useLazyGetSearchMoviesQuery();
+    const [trigger, result] = useLazyGetSearchMoviesQuery();
 
     const onSubmit = (data  : {searchInput: string}) => {
         trigger(data.searchInput);
