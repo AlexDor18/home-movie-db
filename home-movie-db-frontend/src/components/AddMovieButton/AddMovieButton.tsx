@@ -1,4 +1,3 @@
-import { use } from "react";
 import { useGetAllMoviesQuery, usePostAddMoveByIdMutation } from "../../redux/api/movieApi";
 
 interface AddMovieButtonProps {
