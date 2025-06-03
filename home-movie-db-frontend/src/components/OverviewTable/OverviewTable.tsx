@@ -24,7 +24,7 @@ function OverviewTable<T> (props: Readonly<OverviewTableProps<T>>) {
   })
 
   return (
-    <table className='mx-auto mb-6  border-[#BBBBBB] border-solid border-[1px] max-w-[1650px]'>
+    <table className='mx-auto mb-6 border-[#BBBBBB] border-solid border-[1px] max-w-[1650px]'>
       <thead>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
