@@ -20,12 +20,13 @@
   <properties>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
-    <spring.version>3.4.4</spring.version>
+    <spring.version>3.5.0</spring.version>
     <maven.compiler.version>3.14.0</maven.compiler.version>
     <maven.resources.version>3.2.0</maven.resources.version>
     <eirslett.version>1.15.1</eirslett.version>
     <jacoco.version>0.8.13</jacoco.version>
     <org.mapstruct.version>1.6.3</org.mapstruct.version>
+    <wiremock.version>3.13.0</wiremock.version>
     <!-- SONARQUBE -->
     <sonar.organization>alexdor18</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -90,6 +91,19 @@
                     <format>XML</format>
                   </formats>
                 </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>3.5.0</version>
+            <executions>
+              <execution>
+                <id>auto-clean</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>clean</goal>
+                </goals>
               </execution>
             </executions>
           </plugin>

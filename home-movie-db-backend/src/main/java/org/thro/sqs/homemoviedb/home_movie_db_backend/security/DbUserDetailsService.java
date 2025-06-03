@@ -26,6 +26,7 @@ public class DbUserDetailsService implements UserDetailsService {
         UserEntity user = this.userRepository.findByUsername(username);
 
         if(user == null) {
+            log.warn("User with username " + username + " not found");
             throw new UsernameNotFoundException("User with username " + username + " not found");
         }
 

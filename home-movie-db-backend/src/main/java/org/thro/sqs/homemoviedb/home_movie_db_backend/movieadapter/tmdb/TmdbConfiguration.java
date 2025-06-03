@@ -13,4 +13,6 @@ import lombok.Setter;
 public class TmdbConfiguration {
 
     private String apiKey;
+
+    private String apiUrl;
 }

@@ -4,9 +4,11 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class TmdbMovieMessage {
     private boolean adult;
     private String backdrop_path; // NOSONAR: External API Defintion
