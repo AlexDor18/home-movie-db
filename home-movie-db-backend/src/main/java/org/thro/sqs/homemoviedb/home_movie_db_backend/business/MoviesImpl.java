@@ -10,7 +10,7 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.UserDto;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDao;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.UserDao;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieAdapter;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,12 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MoviesImpl implements Movies {
 
-    private MovieInformations movieInformations;
+    private MovieAdapter movieInformations;
     private MovieDao movieDao;
     private UserDao userDao;
     private UserService userService;
 
-    public MoviesImpl(MovieInformations informations, MovieDao movieDaoBean, UserDao userDaoBean, UserService userService) {
+    public MoviesImpl(MovieAdapter informations, MovieDao movieDaoBean, UserDao userDaoBean, UserService userService) {
         movieInformations = informations;
         movieDao = movieDaoBean;
         userDao = userDaoBean;
