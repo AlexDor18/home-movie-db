@@ -2,6 +2,7 @@ package org.thro.sqs.homemoviedb.home_movie_db_backend.dao.entity;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -20,6 +21,7 @@ public class UserEntity {
     @GeneratedValue
     private Long id;
     
+    @Column(unique = true)
     private String username;
     
     private String password;

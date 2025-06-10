@@ -94,6 +94,16 @@ class ApplicationIT {
 
     @Test
     @SneakyThrows
+    void testRegisterEndpointWithExistingUsername() {
+        // Test the register endpoint
+        mockMvc.perform(MockMvcRequestBuilders.post("/auth/signup").with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"default_user\",\"password\":\"test\",\"prename\":\"test\",\"surname\":\"test\"}"))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    @SneakyThrows
     void testLoginEndpoint() {
         // Test the login endpoint
         mockMvc.perform(MockMvcRequestBuilders.post("/login").with(csrf())
