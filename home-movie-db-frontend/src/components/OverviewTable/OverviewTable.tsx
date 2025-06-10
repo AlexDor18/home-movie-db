@@ -41,9 +41,9 @@ function OverviewTable<T> (props: Readonly<OverviewTableProps<T>>) {
           </tr>
         ))}
       </thead>
-      <tbody>
+      <tbody className='bg-white'>
         {table.getRowModel().rows.map(row => (
-          <tr key={row.id} className='odd:bg-white even:bg-[#65C576]/16'>
+          <tr key={row.id} className='even:bg-[#65C576]/16'>
             {row.getVisibleCells().map(cell => (
               <td key={cell.id} className='text-center px-3 py-6 border-r-[#BBBBBB] border-r-[1px] border-solid last:border-r-0 min-w-32'>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
