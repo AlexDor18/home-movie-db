@@ -67,7 +67,7 @@ const NewUserForm = (props: NewUserFormProps) => {
                 className="bg-[#3200ee] px-4 py-1.5 text-white"
                 value={"Registrieren"}
             />
-            <NavLink to="/login" className="text-[#3200ee] ml-4">Zurück</NavLink>
+            <NavLink to="/" className="text-[#3200ee] ml-4">Zurück</NavLink>
             </div>
         </form>
     )
