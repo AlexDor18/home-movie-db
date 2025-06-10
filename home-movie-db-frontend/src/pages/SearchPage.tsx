@@ -14,7 +14,7 @@ const SearchPage = () => {
 
     return (
         <div className="flex flex-col mx-8">
-            <NavLink to="/home" className="my-3 text-blue-800 underline">{"<-"} Zurück zur Startseite</NavLink>
+            <NavLink to="/home" className="my-3 text-blue-800 underline w-max">{"<-"} Zurück zur Startseite</NavLink>
             <SearchBar onSubmit={onSubmit} />
             {result.data && <OverviewTable data={result.data ||[]} columns={selectMovieColumns} />}
             {result.isLoading && <p>Suche wird ausgeführt...</p>}
