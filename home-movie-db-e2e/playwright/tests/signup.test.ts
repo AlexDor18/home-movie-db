@@ -20,15 +20,25 @@ test.describe('Signup page', () => {
     await page.getByPlaceholder('Username').fill('playwrightuser');
     await page.getByPlaceholder('Password').fill('password123');
     await page.getByRole('button', { name: 'Registrieren' }).click();
-    // TODO: Add assertions to check for successful signup
+    await expect(page).toHaveURL('/');
   });
 
   test('should display error message for invalid signup', async ({ page }) => {
-    await page.getByPlaceholder('Username').fill('testuser');
+    await page.getByRole('button', { name: 'Registrieren' }).click();
+    await expect(page.getByText('Vorname ist erforderlich')).toBeVisible();
+    await expect(page.getByText('Nachname ist erforderlich')).toBeVisible();
+    await expect(page.getByText('Username ist erforderlich')).toBeVisible();
+    await expect(page.getByText('Password ist erforderlich')).toBeVisible();
+  });
+
+  test('reject doublicated user', async ({ page }) => {
+    await page.getByPlaceholder('Vorname').fill('Playwright');
+    await page.getByPlaceholder('Nachname').fill('User');
+    await page.getByPlaceholder('Username').fill('playwrightuser');
     await page.getByPlaceholder('Password').fill('password123');
     await page.getByRole('button', { name: 'Registrieren' }).click();
-    await expect(page.getByText('Invalid email address')).toBeVisible();
-  });
+    await expect(page.getByText('Fehler beim Registrieren. Bitte nutzen Sie einen anderen Benutzernamen.')).toBeVisible();
+  })
 
   test('redirect to login page', async ({ page }) => {
     await page.getByText('Zurück').click();
