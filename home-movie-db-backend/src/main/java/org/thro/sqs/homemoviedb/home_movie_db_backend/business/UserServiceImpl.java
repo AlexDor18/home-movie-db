@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.UserService;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.UserDto;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.UserDao;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserAlreadyExistsException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +23,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createNewUser(UserDto user) {
+        if(userDao.getUserByUsername(user.getUsername()) != null) {
+            log.info("user with username {} already exists", user.getUsername());
+            throw new UserAlreadyExistsException("User with username " + user.getUsername() + " already exists");
+        }
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(16);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -35,5 +41,4 @@ public class UserServiceImpl implements UserService {
         
         return this.userDao.getUserByUsername(username);
     }
-
 }

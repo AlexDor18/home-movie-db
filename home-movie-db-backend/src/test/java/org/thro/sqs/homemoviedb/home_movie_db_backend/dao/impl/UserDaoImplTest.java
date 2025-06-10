@@ -13,7 +13,6 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.UserDto;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.entity.UserEntity;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.UserRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.mapper.UserDaoMapper;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserNotFoundException;
 
 @ExtendWith(MockitoExtension.class)
 class UserDaoImplTest {
@@ -43,7 +42,8 @@ class UserDaoImplTest {
     void getUserByUsernameNotFoundTest() {
         Mockito.when(this.userRepositoryMock.findByUsername("testuser")).thenReturn(null);
 
-        Assertions.assertThrows(UserNotFoundException.class, () -> this.sut.getUserByUsername("testuser"));
+        final UserDto result = this.sut.getUserByUsername("testuser");
+        Assertions.assertNull(result);
     }
 
     @Test

@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.UserDto;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.UserDao;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserAlreadyExistsException;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -41,6 +42,21 @@ class UserServiceImplTest {
 
         Assertions.assertEquals("test", result.getUsername());
         Assertions.assertNotEquals("test", result.getPassword());
+    }
+
+    @Test
+    void dontAllowSameUsernameTest() {
+        UserDto user = new UserDto(){{
+            setUsername("test");
+            setPassword("test");
+        }};
+
+        Mockito.when(userDaoMock.getUserByUsername("test")).thenReturn(new UserDto(){{
+            setId(1L);
+            setUsername("test");
+        }});
+
+        Assertions.assertThrows(UserAlreadyExistsException.class, () -> this.sut.createNewUser(user));
     }
 
     @Test
