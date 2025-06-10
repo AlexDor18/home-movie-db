@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import HomePage from '../../pages/HomePage';
+import { MemoryRouter } from 'react-router';
 
 describe('HomePage', () => {
   it('renders the homepage component', () => {
@@ -11,9 +12,13 @@ describe('HomePage', () => {
       }))
     }))
 
-    render(<HomePage />);
+    render(
+    <MemoryRouter initialEntries={['/home']}>
+      <HomePage />
+    </MemoryRouter>);
     
     expect(screen.getByText(/Title/)).toBeInTheDocument();
     expect(screen.getByText(/Beschreibung/)).toBeInTheDocument();
+    expect(screen.getByText(/The Shawshank Redemption/)).toBeInTheDocument();
   });
 });

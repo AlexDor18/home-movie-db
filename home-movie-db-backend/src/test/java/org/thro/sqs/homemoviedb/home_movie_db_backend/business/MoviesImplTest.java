@@ -15,7 +15,7 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.UserDto;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDao;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.UserDao;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieInformations;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieAdapter;
 
 @ExtendWith(MockitoExtension.class)
 class MoviesImplTest {
@@ -27,7 +27,7 @@ class MoviesImplTest {
     private MovieDao movieDaoMock;
 
     @Mock
-    private MovieInformations movieInformationsMock;
+    private MovieAdapter movieInformationsMock;
 
     @Mock
     private UserService userServiceMock;

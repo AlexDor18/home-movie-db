@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 const LoginPage = () => {
     const [user, setUser] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const {register, handleSubmit } = useForm();
+    const {register, handleSubmit} = useForm();
     const navigate = useNavigate()
 
     const handleLogin = () => {
         const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, '$1')
+        setIsLoading(true);
 
         fetch("/auth/login", {
             method: "POST",
@@ -24,6 +27,8 @@ const LoginPage = () => {
                 password: password
             })
         }).then((res) => {
+            setIsLoading(false)
+
             const url = new URL(res.url);
             if(url.searchParams.get("error") === ""){
                 console.error("Invalid auth credentials");
@@ -34,14 +39,17 @@ const LoginPage = () => {
                 const url = new URL(res.url);
                 navigate(url.pathname);
             }
-        }).catch((err) => console.error(err));
+        }).catch((err) => {
+            setIsLoading(false);
+            console.error(err)}
+        );
     }
 
     return (
         <div className="flex-1 flex justify-center flex-col items-center my-6">
-            <h2 className="text-3xl font-bold mb-4 flex-block my-8">Willkommen in der Home Movie DB</h2>
+            <h2 className="text-3xl font-bold mb-8 flex-block">Willkommen in der Home Movie DB</h2>
 
-            <p>Noch kein Nutzer vorhanden? <NavLink to="/signup">Hier Registrieren</NavLink></p>
+            <p className="mb-4">Noch kein Nutzer vorhanden? <NavLink className="underline" to="/signup">Hier Registrieren</NavLink></p>
 
             <form onSubmit={handleSubmit(handleLogin)} className="mx-auto max-w-md p-8 bg-white rounded-lg shadow-lg">
             <label className="block text-gray-700 font-bold mb-2">
@@ -53,6 +61,7 @@ const LoginPage = () => {
                     value={user} 
                     onChange={(e) => setUser(e.target.value)} 
                     className="bg-white border-solid border-[1px] border-[#ccc] w-full py-1.5 px-2" 
+                    disabled={isLoading}
                 />
             </label>
             <br />
@@ -65,16 +74,18 @@ const LoginPage = () => {
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                     className="bg-white border-solid border-[1px] border-[#ccc] w-full py-1.5 px-2" 
+                    disabled={isLoading}
                 />
             </label>
             {error && <p className="text-red-500">Invalid auth credentials</p>}
             <br />
-            <button 
+            {!isLoading && <button 
                 type="submit" 
                 className="bg-[#3200ee] px-4 py-1.5 text-white"
             >
                 Login
-            </button>
+            </button>}
+            {isLoading && <LoadingSpinner />}
         </form>
         </div>
     );

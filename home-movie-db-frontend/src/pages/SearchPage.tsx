@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import OverviewTable from "../components/OverviewTable/OverviewTable";
 import { selectMovieColumns } from "../components/OverviewTable/selectMovieColumns";
 import SearchBar from "../components/SearchBar/SearchBar";
@@ -12,9 +13,12 @@ const SearchPage = () => {
     }
 
     return (
-        <div>
+        <div className="flex flex-col mx-8">
+            <NavLink to="/home" className="my-3 text-blue-800 underline w-max">{"<-"} Zurück zur Startseite</NavLink>
             <SearchBar onSubmit={onSubmit} />
-            <OverviewTable data={result.data ||[]} columns={selectMovieColumns} />
+            {result.data && <OverviewTable data={result.data ||[]} columns={selectMovieColumns} />}
+            {result.isLoading && <p>Suche wird ausgeführt...</p>}
+            {!result.data && <p>Geben Sie für die Suche einen Begriff in die Suchleiste ein</p>}
         </div>
     )
 }
