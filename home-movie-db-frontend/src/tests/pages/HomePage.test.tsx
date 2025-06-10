@@ -19,5 +19,6 @@ describe('HomePage', () => {
     
     expect(screen.getByText(/Title/)).toBeInTheDocument();
     expect(screen.getByText(/Beschreibung/)).toBeInTheDocument();
+    expect(screen.getByText(/The Shawshank Redemption/)).toBeInTheDocument();
   });
 });
