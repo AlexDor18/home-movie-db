@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createNewUser(UserDto user) {
         if(userDao.getUserByUsername(user.getUsername()) != null) {
+            log.info("user with username {} already exists", user.getUsername());
             throw new UserAlreadyExistsException("User with username " + user.getUsername() + " already exists");
         }
 
@@ -40,5 +41,4 @@ public class UserServiceImpl implements UserService {
         
         return this.userDao.getUserByUsername(username);
     }
-
 }

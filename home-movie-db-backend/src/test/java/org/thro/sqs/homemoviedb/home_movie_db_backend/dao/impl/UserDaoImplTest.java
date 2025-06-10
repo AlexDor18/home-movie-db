@@ -43,7 +43,8 @@ class UserDaoImplTest {
     void getUserByUsernameNotFoundTest() {
         Mockito.when(this.userRepositoryMock.findByUsername("testuser")).thenReturn(null);
 
-        Assertions.assertThrows(UserNotFoundException.class, () -> this.sut.getUserByUsername("testuser"));
+        final UserDto result = this.sut.getUserByUsername("testuser");
+        Assertions.assertNull(result);
     }
 
     @Test
