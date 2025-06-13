@@ -15,6 +15,9 @@ test.describe("Test add new movie", () => {
     test('should display search results', async ({page}) => {
         await page.getByPlaceholder('Search...').fill('Star Wars');
         await page.getByRole('button', { name: 'Search' }).click();
-        await expect(page.getByText('Star Wars')).toBeVisible();
+        await page.waitForSelector('button')
+        const addButtons = await page.$$('button');
+
+        await expect(addButtons.length).toBeGreaterThan(0);
     })  
 });

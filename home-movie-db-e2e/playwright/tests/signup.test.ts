@@ -15,9 +15,9 @@ test.describe('Signup page', () => {
   });
 
   test('should allow user to submit signup form', async ({ page }) => {
-    await page.getByPlaceholder('Vorname').fill('Playwright');
+    await page.getByPlaceholder('Vorname').fill('Playwright2');
     await page.getByPlaceholder('Nachname').fill('User');
-    await page.getByPlaceholder('Username').fill('playwrightuser');
+    await page.getByPlaceholder('Username').fill('newuser');
     await page.getByPlaceholder('Password').fill('password123');
     await page.getByRole('button', { name: 'Registrieren' }).click();
     await expect(page).toHaveURL('/');

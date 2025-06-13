@@ -20,8 +20,8 @@ test.describe('Login page', () => {
   });
 
   test('should allow correct username and password', async ({ page }) => {
-    await page.getByLabel('Username').fill('dev');
-    await page.getByLabel('Password').fill('asdfg-01');
+    await page.getByLabel('Username').fill('playwrightuser');
+    await page.getByLabel('Password').fill('password123');
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(page.getByText('Meine Filme')).toBeVisible();
   });
