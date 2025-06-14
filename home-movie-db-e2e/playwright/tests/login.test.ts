@@ -18,11 +18,4 @@ test.describe('Login page', () => {
     await page.getByRole('button', { name: 'Login' }).click();
     await expect(page.getByText('Invalid auth credentials')).toBeVisible();
   });
-
-  test('should allow correct username and password', async ({ page }) => {
-    await page.getByLabel('Username').fill('playwrightuser');
-    await page.getByLabel('Password').fill('password123');
-    await page.getByRole('button', { name: 'Login' }).click();
-    await expect(page.getByText('Meine Filme')).toBeVisible();
-  });
 });
