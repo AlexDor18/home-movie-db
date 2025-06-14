@@ -108,6 +108,20 @@ jobs:
       run: npx playwright install --with-deps
     - name: Start docker compose
       run: docker compose up -d
+    - name: Wait for Application to be reachable
+      run: |
+        echo "Waiting for application to be reachable...."
+        for i in {1..30}; do
+          if curl -sSf http://localhost:8080/actuator/health > /dev/null; then
+            echo "Application is reachable."
+            exit 0
+          fi
+          echo "Application not yet reachable, retrying in 2s..."
+          sleep 2
+        done
+        echo "Application failed to become reachable."
+        docker compose logs
+        exit 1
     - name: Run Playwright tests
       working-directory: ./home-movie-db-e2e/playwright
       run: npx playwright test
