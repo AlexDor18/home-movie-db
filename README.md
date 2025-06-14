@@ -14,7 +14,7 @@ Use the "API Read Access Token".
 After getting an Api Key you have to add it as environment variable on your system under TMDB_API_KEY or replace ${TMDB_API_KEY} it in the docker-compose.yml.
 
 ## Database credentials
-In the docker compose file are default db access key set. Replace them with new ones to prevent unwanted access.
+In the docker compose file are default db access keys set. Replace them with new ones to prevent unwanted access.
 
 ## Run application with docker-compose
 To run the application with docker-compose just run ```docker-compose up``` from the root of this repository.
