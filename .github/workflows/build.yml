@@ -93,18 +93,23 @@ jobs:
     name: Run Playwright tests
     needs: docker
     runs-on: ubuntu-latest
+    env:
+      TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
     - name: Install dependencies
+      working-directory: ./home-movie-db-e2e/playwright
       run: npm ci
     - name: Install Playwright Browsers
+      working-directory: ./home-movie-db-e2e/playwright
       run: npx playwright install --with-deps
     - name: Start docker compose
       run: docker compose up -d
     - name: Run Playwright tests
+      working-directory: ./home-movie-db-e2e/playwright
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}

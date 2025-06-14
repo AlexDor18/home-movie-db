@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      TMDB_API_KEY: INSERT API KEY HERE 
+      TMDB_API_KEY: ${TMDB_API_KEY} 
       DB_USER: homeMovieDb  
       DB_PASSWORD: homeMovieDb
     ports:
