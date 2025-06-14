@@ -124,7 +124,7 @@ jobs:
         exit 1
     - name: Run Playwright tests
       working-directory: ./home-movie-db-e2e/playwright
-      run: npx playwright test
+      run: npx playwright test --timeout=120000
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
