@@ -1,9 +1,9 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AlexDor18_home-movie-db&metric=alert_status&token=38143e1418c153b6a1b75b3afa1976766cf39412)](https://sonarcloud.io/summary/new_code?id=AlexDor18_home-movie-db) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AlexDor18_home-movie-db&metric=coverage&token=38143e1418c153b6a1b75b3afa1976766cf39412)](https://sonarcloud.io/summary/new_code?id=AlexDor18_home-movie-db) 
 
 # home-movie-db
-Docker application for managing your movies at home
+Home Movie Database is a web application designed to manage and organize your personal movie collection. The application utilizes the TMDB API to fetch movie data and provides a user-friendly interface to browse and search through your collection.
 
-# Run application
+# Getting started
 
 ## TMDB API Key
 To run home-movie-db you have create an account at [The Movie Database (TMDB)](https://www.themoviedb.org/signup?language=de).
