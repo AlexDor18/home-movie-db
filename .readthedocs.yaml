@@ -9,11 +9,11 @@
      # but you can just use your existing Docusaurus site
      install:
        # Install Docusaurus dependencies
-       - cd docs/ && npm install
+       - cd home-movie-db-docs/ && npm install
      build:
        html:
          # Build the site
-         - cd docs/ && npm run build
+         - cd home-movie-db-docs/ && npm run build
          # Copy generated files into Read the Docs directory
          - mkdir --parents $READTHEDOCS_OUTPUT/html/
          - cp --recursive docs/build/* $READTHEDOCS_OUTPUT/html/
