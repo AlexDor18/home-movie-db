@@ -7,12 +7,13 @@ export const movieApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: "/api/movies",
     }),
+    tagTypes: ["Movie"],
     endpoints: (build) => ({
         getAllMovies: build.query<MovieDto[], void>({
             query: () => ({
                 url: "",
             }),
-
+            providesTags: ["Movie"],
             transformResponse: (response:  MovieMessage[] ) => { return MovieMapper.toMovieDtoList(response);}
         }),
         postAddMoveById: build.mutation<void, string>({
@@ -22,7 +23,8 @@ export const movieApi = createApi({
                 headers: {
                     "X-XSRF-TOKEN": document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, '$1')
                 }
-            })
+            }),
+            invalidatesTags: ["Movie"]
         })
     })
 });

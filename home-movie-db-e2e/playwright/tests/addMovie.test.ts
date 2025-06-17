@@ -20,4 +20,13 @@ test.describe("Test add new movie", () => {
 
         await expect(addButtons.length).toBeGreaterThan(0);
     })  
+
+    test('add movie to watchlist', async ({page}) => {
+        await page.getByPlaceholder('Search...').fill('Star Wars');
+        await page.getByRole('button', { name: 'Search' }).click();
+        await page.waitForSelector('button')
+        await page.getByRole('button', { name: 'Add Movie' }).first().click();
+        await page.waitForSelector('button')
+        await expect(page.getByTestId('checkmark')).toBeVisible();
+    })
 });

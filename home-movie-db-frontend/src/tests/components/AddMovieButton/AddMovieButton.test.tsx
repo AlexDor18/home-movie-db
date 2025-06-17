@@ -9,7 +9,7 @@ describe('AddMovieButton', () => {
           data: [{title: "The Shawshank Redemption", overview: "Text", id: "1"}]
       })),
       usePostAddMoveByIdMutation: vi.fn().mockImplementation(() => {
-        return [];
+        return [vi.fn(), {isLoading: false}];
       })
     }))
 
@@ -23,7 +23,7 @@ describe('AddMovieButton', () => {
           data: [{title: "The Shawshank Redemption", overview: "Text", id: "1"}]
       })),
       usePostAddMoveByIdMutation: vi.fn().mockImplementation(() => {
-        return [];
+        return [vi.fn(), {isLoading: false}];
       })
     }))
     
