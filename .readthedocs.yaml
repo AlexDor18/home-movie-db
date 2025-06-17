@@ -16,4 +16,4 @@
          - cd home-movie-db-docs/ && npm run build
          # Copy generated files into Read the Docs directory
          - mkdir --parents $READTHEDOCS_OUTPUT/html/
-         - cp --recursive docs/build/* $READTHEDOCS_OUTPUT/html/
+         - cp --recursive home-movie-db-docs/build/* $READTHEDOCS_OUTPUT/html/
