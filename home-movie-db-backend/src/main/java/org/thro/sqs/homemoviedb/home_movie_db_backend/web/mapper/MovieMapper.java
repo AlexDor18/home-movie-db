@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.GenreDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
 
@@ -19,7 +20,13 @@ public interface MovieMapper {
     @Mapping(target = "originalLanguage", ignore = true)
     @Mapping(target = "originalTitle", ignore = true)
     @Mapping(target = "releaseDate", ignore = true)
+    @Mapping(target = "genres", ignore = true)
     MovieDTO mapToMovieDTO(MovieMessage movieMessage);
+
+    @Mapping(target = ".", source = "name")
+    String mapGenreToString(GenreDTO genre);
+    
+    List<String> mapGenreToString(List<GenreDTO> genres);
 
     List<MovieDTO> mapToMovieDTO(List<MovieMessage> movieMessages);
 }

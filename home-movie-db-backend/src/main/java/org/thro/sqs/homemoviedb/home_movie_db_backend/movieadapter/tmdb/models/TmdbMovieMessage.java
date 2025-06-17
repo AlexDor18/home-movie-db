@@ -13,7 +13,7 @@ public class TmdbMovieMessage {
     private boolean adult;
     private String backdrop_path; // NOSONAR: External API Defintion
     private int budget;
-    private List<TmdbGenreMessage> genres;
+    private List<Integer> genreIds;
     private String homepage;
     private int id;
     private String imdb_id; // NOSONAR: External API Defintion

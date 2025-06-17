@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.GenreDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbGenreMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessage;
 
 import org.mapstruct.Named;
@@ -19,6 +21,10 @@ public interface TmdbMapper {
     MovieDTO mapToMovieDTO(TmdbMovieMessage tmdbMovieMessage);
 
     List<MovieDTO> mapToMovieDTO(List<TmdbMovieMessage> tmdbMovieMessages);
+
+    GenreDTO mapToGenreDTO(TmdbGenreMessage tmdbMovieMessage);
+
+    List<GenreDTO> mapToGenreDTO(List<TmdbGenreMessage> tmdbMovieMessages);
 
     @Named("mapToThumbnailUrl")
     default String mapToThumbnailUrl(String posterPath) {
