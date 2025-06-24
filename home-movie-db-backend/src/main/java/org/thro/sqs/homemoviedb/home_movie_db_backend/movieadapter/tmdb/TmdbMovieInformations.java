@@ -11,7 +11,10 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.mapper.T
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieListMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessage;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class TmdbMovieInformations implements MovieAdapter{
 
     private TmdbHttpClient tmdbHttpClient;
@@ -33,6 +36,7 @@ public class TmdbMovieInformations implements MovieAdapter{
         String sanitizedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
 
         TmdbMovieListMessage result = this.tmdbHttpClient.get("/search/movie?language=de-DE&query="+sanitizedQuery+"&include_adult="+adult, TmdbMovieListMessage.class);   
+
         return this.tmdbMapper.mapToMovieDTO(result.getResults());
     }
 }

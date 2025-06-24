@@ -1,5 +1,7 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.business.models;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,5 +24,7 @@ public class MovieDTO {
     private String originalTitle;
 
     private boolean adult;
+
+    private List<GenreDTO> genres;
 
 }
