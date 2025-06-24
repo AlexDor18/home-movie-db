@@ -45,7 +45,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/AlexDor18/home-movie-db',
+            'https://github.com/AlexDor18/home-movie-db/tree/main/home-movie-db-docs/',
         },
         theme: {
           customCss: './src/css/custom.css',
