@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.interfaces.Movies;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.GenreDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.mapper.MovieMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.web.models.MovieMessage;
@@ -35,11 +36,16 @@ class SearchWebTest {
             setId(1L);
             setAdult(true);
             setTitle("unittest");
+            setGenres(List.of(new GenreDTO(){{
+                setId(1L);
+                setName("unittest");
+            }}));
         }}));
 
         final List<MovieMessage> result = sut.getSearchMovie("query", true);
 
         Assertions.assertEquals(1, result.size());
+        Assertions.assertEquals("unittest", result.get(0).getGenres().getFirst());
     }
 
 }

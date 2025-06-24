@@ -25,6 +25,9 @@ spring:
         url: jdbc:postgresql://localhost:3307/homeMovieDb 
         username: homeMovieDb
         password: asdfg-01
+logging:
+  level:
+    '[org.thro.sqs.homemoviedb.home_movie_db_backend]': debug
 
 ---
 spring:
