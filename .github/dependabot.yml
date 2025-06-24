@@ -13,6 +13,6 @@ updates:
     directories: 
       - "/home-movie-db-frontend"
       - "/home-movie-db-docs"
-      - "/home-movie-db-e2e/playwright
+      - "/home-movie-db-e2e/playwright"
     schedule:
       interval: "weekly"
