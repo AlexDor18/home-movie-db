@@ -5,6 +5,8 @@ Home Movie Database is a web application designed to manage and organize your pe
 
 # Getting started
 
+# TODO: addre prerequisits
+
 ## TMDB API Key
 To run home-movie-db you have create an account at [The Movie Database (TMDB)](https://www.themoviedb.org/signup?language=de).
 With an account you are able to obtain an [API Key](https://www.themoviedb.org/settings/api) for TMDB.

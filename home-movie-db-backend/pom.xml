@@ -82,7 +82,7 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-			<version>6.5.0</version>
+			<version>6.5.1</version>
 		</dependency>
 		<!-- other external dependencies -->
 		<dependency>
@@ -97,7 +97,7 @@
 		<dependency>
 		    <groupId>org.mock-server</groupId>
 		    <artifactId>mockserver-spring-test-listener-no-dependencies</artifactId>
-		    <version>5.14.0</version>
+		    <version>5.15.0</version>
 		</dependency>
 	</dependencies>
 

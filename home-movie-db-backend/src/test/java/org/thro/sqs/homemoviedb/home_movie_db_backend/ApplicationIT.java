@@ -143,7 +143,7 @@ class ApplicationIT {
         starWarsEpisodeIV.setAdult(false);
         starWarsEpisodeIV.setBackdrop_path("/path/to/starwars1/backdrop.jpg");
         starWarsEpisodeIV.setBudget(20000000);
-        starWarsEpisodeIV.setGenres(new ArrayList<>());
+        starWarsEpisodeIV.setGenreIds(new ArrayList<>());
         starWarsEpisodeIV.setHomepage("https://www.starwars.com");
         starWarsEpisodeIV.setId(11);
         starWarsEpisodeIV.setImdb_id("tt0076759");
@@ -169,7 +169,7 @@ class ApplicationIT {
         starWarsEpisodeV.setAdult(false);
         starWarsEpisodeV.setBackdrop_path("/path/to/starwars2/backdrop.jpg");
         starWarsEpisodeV.setBudget(25000000);
-        starWarsEpisodeV.setGenres(new ArrayList<>());
+        starWarsEpisodeV.setGenreIds(new ArrayList<>());
         starWarsEpisodeV.setHomepage("https://www.starwars.com");
         starWarsEpisodeV.setId(12);
         starWarsEpisodeV.setImdb_id("tt0079945");
@@ -229,7 +229,7 @@ class ApplicationIT {
         starWarsEpisodeIV.setAdult(false);
         starWarsEpisodeIV.setBackdrop_path("/path/to/starwars1/backdrop.jpg");
         starWarsEpisodeIV.setBudget(20000000);
-        starWarsEpisodeIV.setGenres(new ArrayList<>());
+        starWarsEpisodeIV.setGenreIds(new ArrayList<>());
         starWarsEpisodeIV.setHomepage("https://www.starwars.com");
         starWarsEpisodeIV.setId(11);
         starWarsEpisodeIV.setImdb_id("tt0076759");
