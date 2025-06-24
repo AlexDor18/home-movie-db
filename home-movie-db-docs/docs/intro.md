@@ -2,46 +2,24 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Welcome to Home Movie DB
 
-Let's discover **Docusaurus in less than 5 minutes**.
+# Getting Started
+Follow the follwing steps to start home-movie-db on your docker infrastructure.
 
-## Getting Started
+## TMDB API Key
+To run home-movie-db you have create an account at [The Movie Database (TMDB)](https://www.themoviedb.org/signup?language=de).
+With an account you are able to obtain an [API Key](https://www.themoviedb.org/settings/api) for TMDB.
+Use the "API Read Access Token".
 
-Get started by **creating a new site**.
+## Insert Use Api Key
+After getting an Api Key you have to add it as environment variable on your system under TMDB_API_KEY or replace ```${TMDB_API_KEY}``` it in the docker-compose.yml.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Database credentials
+In the docker compose file are default db access keys set. Replace them with new ones to prevent unwanted access.
 
-### What you'll need
+## Run application with docker-compose
+To run the application with docker-compose just run ```docker-compose up``` from the root of this repository.
+When all all actions are performed successfully the application can be accessed form [localhost](http://{host}:8080).
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
 
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
