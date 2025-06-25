@@ -1,5 +1,6 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -91,5 +92,23 @@ class GenreDaoImplTest {
         sut.saveGenres(genres);
 
         Mockito.verify(genreRepositoryMock, Mockito.never()).saveAllAndFlush(Mockito.any());
+    }
+
+    @Test
+    void saveGenre_shouldHandleNullGenre() {
+        sut.saveGenre(null);
+        Mockito.verifyNoInteractions(genreRepositoryMock);
+        Mockito.verifyNoInteractions(movieMapperMock);
+    }
+
+    @Test
+    void saveGenre_shouldHandleEmptyArray() {
+        sut.saveGenres(new ArrayList<>());
+        Mockito.verifyNoInteractions(genreRepositoryMock);
+        Mockito.verifyNoInteractions(movieMapperMock);
+
+        sut.saveGenres(null);
+        Mockito.verifyNoInteractions(genreRepositoryMock);
+        Mockito.verifyNoInteractions(movieMapperMock);
     }
 }

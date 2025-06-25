@@ -25,6 +25,11 @@ public class GenreDaoImpl implements GenreDao {
 
     @Override
     public void saveGenre(GenreDTO genre) {
+        if(genre == null) {
+            log.warn("No genres to save, skipping.");
+            return;
+        }
+
         GenresEntity genresEntity = genreRepository.findById(genre.getId()).orElse(null);
 
         if(genresEntity == null) {
