@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.GenreDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.mapper.TmdbMapper;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbGenreMessage;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieDetailsMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieListMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessage;
 
@@ -34,12 +36,15 @@ class TmdbMovieInformationsTest {
 
     @Test
     void getMovieInformationsByIdTest() {
-        Mockito.when(tmdbHttpClientMock.get("/movie/1?language=de-DE", TmdbMovieMessage.class)).thenReturn(new TmdbMovieMessage(){{
+        Mockito.when(tmdbHttpClientMock.get("/movie/1?language=de-DE", TmdbMovieDetailsMessage.class)).thenReturn(new TmdbMovieDetailsMessage(){{
             setId(1);
             setOverview("overview");
             setTitle("title");
             setPoster_path("/thumbnailUrl");
-            setGenre_ids(List.of(1));
+            setGenres(List.of(new TmdbGenreMessage(){{
+                setId(1);
+                setName("unittest");
+            }}));
 
         }});
 

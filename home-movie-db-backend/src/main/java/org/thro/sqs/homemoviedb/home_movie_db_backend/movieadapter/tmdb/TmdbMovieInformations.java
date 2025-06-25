@@ -9,8 +9,8 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.GenreDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.interfaces.MovieAdapter;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.mapper.TmdbMapper;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieDetailsMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieListMessage;
-import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessage;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,9 +30,16 @@ public class TmdbMovieInformations implements MovieAdapter{
 
     @Override
     public MovieDTO getMovieInformationsById(Long movieId) {
-        TmdbMovieMessage result = this.tmdbHttpClient.get("/movie/"+movieId+"?language=de-DE", TmdbMovieMessage.class);
+        TmdbMovieDetailsMessage result = this.tmdbHttpClient.get("/movie/"+movieId+"?language=de-DE", TmdbMovieDetailsMessage.class);
         List<GenreDTO> genres = this.tmdbGenreAdapter.getAllGenres();
-        return this.tmdbMapper.mapToMovieDTO(result, genres);
+
+        MovieDTO movie = this.tmdbMapper.mapMovieDetailsToMovieDTO(result);
+        if(log.isDebugEnabled()){
+            log.debug("Retrieved genres: {}", genres.stream().map(GenreDTO::getName).toList());
+            log.debug("movie genre {}", result.getGenres());
+        }
+        
+        return movie;
     }
 
     @Override

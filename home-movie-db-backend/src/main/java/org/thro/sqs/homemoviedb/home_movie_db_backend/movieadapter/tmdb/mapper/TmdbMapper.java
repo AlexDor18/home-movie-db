@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.GenreDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.business.models.MovieDTO;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbGenreMessage;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieDetailsMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessage;
 
 import org.mapstruct.Named;
@@ -21,6 +22,12 @@ public interface TmdbMapper {
     @Mapping(source = "release_date", target="releaseDate")
     @Mapping(source = "genre_ids", target="genres", qualifiedByName = "mapIntToGenreDTO")
     MovieDTO mapToMovieDTO(TmdbMovieMessage tmdbMovieMessage, @Context List<GenreDTO> genres);
+
+    @Mapping(source = "poster_path", target="thumbnailUrl", qualifiedByName = "mapToThumbnailUrl")
+    @Mapping(source = "original_language", target="originalLanguage")
+    @Mapping(source = "original_title", target="originalTitle")
+    @Mapping(source = "release_date", target="releaseDate")
+    MovieDTO mapMovieDetailsToMovieDTO(TmdbMovieDetailsMessage tmdbMovieMessage);
 
     List<MovieDTO> mapToMovieDTO(List<TmdbMovieMessage> tmdbMovieMessages, @Context List<GenreDTO> genres);
 

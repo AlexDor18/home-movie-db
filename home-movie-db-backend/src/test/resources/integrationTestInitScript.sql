@@ -39,12 +39,14 @@ CREATE TABLE user_entity_movies (
 );
 
 CREATE TABLE movie_entity_genres (
-  movie_entity_id BIGINT NOT NULL,
-  genres_entity_id BIGINT NOT NULL,
-  PRIMARY KEY (movie_entity_id, genres_entity_id),
-  FOREIGN KEY (movie_entity_id) REFERENCES movie_entity(id),
-  FOREIGN KEY (genres_entity_id) REFERENCES genres_entity(id)
+  movies_id BIGINT NOT NULL,
+  genres_id BIGINT NOT NULL,
+  PRIMARY KEY (movies_id, genres_id),
+  FOREIGN KEY (movies_id) REFERENCES movie_entity(id),
+  FOREIGN KEY (genres_id) REFERENCES genres_entity(id)
 );
+
+CREATE SEQUENCE IF NOT EXISTS user_entity_seq START WITH 1 INCREMENT BY 50;
 
 INSERT INTO user_entity (id, username, password, surname, prename)
 VALUES (99, 'default_user', 'default_password', 'integration', 'test');
