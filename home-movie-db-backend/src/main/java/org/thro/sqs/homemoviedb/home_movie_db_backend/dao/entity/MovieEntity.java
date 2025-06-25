@@ -1,5 +1,6 @@
 package org.thro.sqs.homemoviedb.home_movie_db_backend.dao.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -8,9 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @Entity
 public class MovieEntity {
 
@@ -27,7 +30,7 @@ public class MovieEntity {
     
     private boolean adult;
     
-    private String releaseDate;
+    private LocalDate releaseDate;
 
     @Column(name = "original_language")
     private String originalLanguage;

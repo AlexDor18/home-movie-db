@@ -19,6 +19,9 @@ import org.springframework.test.web.servlet.result.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbGenreListMessage;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbGenreMessage;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieDetailsMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieListMessage;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.movieadapter.tmdb.models.TmdbMovieMessage;
 
@@ -26,8 +29,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockserver.model.HttpRequest.*;
@@ -143,7 +149,7 @@ class ApplicationIT {
         starWarsEpisodeIV.setAdult(false);
         starWarsEpisodeIV.setBackdrop_path("/path/to/starwars1/backdrop.jpg");
         starWarsEpisodeIV.setBudget(20000000);
-        starWarsEpisodeIV.setGenreIds(new ArrayList<>());
+        starWarsEpisodeIV.setGenre_ids(List.of(1));
         starWarsEpisodeIV.setHomepage("https://www.starwars.com");
         starWarsEpisodeIV.setId(11);
         starWarsEpisodeIV.setImdb_id("tt0076759");
@@ -169,7 +175,7 @@ class ApplicationIT {
         starWarsEpisodeV.setAdult(false);
         starWarsEpisodeV.setBackdrop_path("/path/to/starwars2/backdrop.jpg");
         starWarsEpisodeV.setBudget(25000000);
-        starWarsEpisodeV.setGenreIds(new ArrayList<>());
+        starWarsEpisodeV.setGenre_ids(List.of(1));
         starWarsEpisodeV.setHomepage("https://www.starwars.com");
         starWarsEpisodeV.setId(12);
         starWarsEpisodeV.setImdb_id("tt0079945");
@@ -195,6 +201,9 @@ class ApplicationIT {
         TmdbMovieListMessage result = new TmdbMovieListMessage();
         result.setResults(Arrays.asList(starWarsEpisodeIV, starWarsEpisodeV));
 
+        TmdbGenreListMessage genres = new TmdbGenreListMessage();
+        genres.setGenres(List.of(new TmdbGenreMessage(1, "Science Fiction")));
+
         ObjectMapper objectMapper = new ObjectMapper();
         String resultString = objectMapper.writeValueAsString(result);
 
@@ -214,22 +223,41 @@ class ApplicationIT {
                 .withStatusCode(200)
         );
 
+        mockServerClient
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/genre/movie/list")
+                                .withQueryStringParameter("language", "de-DE")
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withContentType(org.mockserver.model.MediaType.APPLICATION_JSON)
+                                .withBody(objectMapper.writeValueAsString(genres))
+                );   
+
         mockMvc.perform(MockMvcRequestBuilders.get("/api/search/movies?query=StarWars&adult=true").with(csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].genres[0]").value("Science Fiction"));
     }
 
     @Test
     @WithUserDetails("default_user")
     @SneakyThrows
     void testAddMovie(){
-        TmdbMovieMessage starWarsEpisodeIV = new TmdbMovieMessage();
+        TmdbGenreMessage scienceFictionGenre = new TmdbGenreMessage(1, "Science Fiction");
+        TmdbGenreListMessage genres = new TmdbGenreListMessage();
+        genres.setGenres(List.of(scienceFictionGenre));
+
+        TmdbMovieDetailsMessage starWarsEpisodeIV = new TmdbMovieDetailsMessage();
         starWarsEpisodeIV.setAdult(false);
         starWarsEpisodeIV.setBackdrop_path("/path/to/starwars1/backdrop.jpg");
         starWarsEpisodeIV.setBudget(20000000);
-        starWarsEpisodeIV.setGenreIds(new ArrayList<>());
+        starWarsEpisodeIV.setGenres(List.of(scienceFictionGenre));
         starWarsEpisodeIV.setHomepage("https://www.starwars.com");
         starWarsEpisodeIV.setId(11);
         starWarsEpisodeIV.setImdb_id("tt0076759");
@@ -240,7 +268,7 @@ class ApplicationIT {
         starWarsEpisodeIV.setPoster_path("/path/to/starwars1/poster.jpg");
         starWarsEpisodeIV.setProduction_companies(new ArrayList<>());
         starWarsEpisodeIV.setProduction_countries(new ArrayList<>());
-        starWarsEpisodeIV.setRelease_date("1977-05-25");
+        starWarsEpisodeIV.setRelease_date(LocalDate.parse("1977-05-25", DateTimeFormatter.ISO_DATE).toString());
         starWarsEpisodeIV.setRevenue(100000000);
         starWarsEpisodeIV.setRuntime(121);
         starWarsEpisodeIV.setSpoken_languages(new ArrayList<>());
@@ -265,13 +293,26 @@ class ApplicationIT {
                                 .withStatusCode(200)
                                 .withContentType(org.mockserver.model.MediaType.APPLICATION_JSON)
                                 .withBody(objectMapper.writeValueAsString(starWarsEpisodeIV))
-                );
-
+                );  
+        
+        mockServerClient
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/genre/movie/list")
+                                .withQueryStringParameter("language", "de-DE")
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withContentType(org.mockserver.model.MediaType.APPLICATION_JSON)
+                                .withBody(objectMapper.writeValueAsString(genres))
+                );  
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/movies/11").with(csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Star Wars: Episode IV - A New Hope"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Star Wars: Episode IV - A New Hope"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.genres[0]").value("Science Fiction"));
     }
-
 }

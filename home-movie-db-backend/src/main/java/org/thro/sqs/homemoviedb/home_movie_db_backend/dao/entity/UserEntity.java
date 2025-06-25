@@ -18,7 +18,7 @@ import lombok.Setter;
 public class UserEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.SEQUENCE)
     private Long id;
     
     @Column(unique = true)

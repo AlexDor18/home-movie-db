@@ -2,10 +2,7 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
+  useReactTable
 } from '@tanstack/react-table'
 
 interface OverviewTableProps<T> {
@@ -18,9 +15,6 @@ function OverviewTable<T> (props: Readonly<OverviewTableProps<T>>) {
     data: props.data,
     columns: props.columns,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (
