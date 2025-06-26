@@ -16,6 +16,13 @@ export const movieApi = createApi({
             providesTags: ["Movie"],
             transformResponse: (response:  MovieMessage[] ) => { return MovieMapper.toMovieDtoList(response);}
         }),
+        getMovieById: build.query<MovieDto, string>({
+            query: (movieId) => ({
+                url: `/${movieId}`,
+            }),
+            // providesTags: (_result, _error, movieId) => [{ type: "Movie", id: movieId }],
+            transformResponse: (response: MovieMessage) => { return MovieMapper.toMovieDto(response); }
+        }),
         postAddMoveById: build.mutation<void, string>({
             query: (movieId) => ({
                 url: "/"+movieId,
@@ -29,4 +36,4 @@ export const movieApi = createApi({
     })
 });
 
-export const { useGetAllMoviesQuery, usePostAddMoveByIdMutation } = movieApi;
+export const { useGetAllMoviesQuery, useGetMovieByIdQuery, usePostAddMoveByIdMutation } = movieApi;

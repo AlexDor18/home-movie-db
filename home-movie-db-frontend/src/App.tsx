@@ -5,6 +5,7 @@ import NotFoundPage from "./pages/NotFoundPage"
 import SearchPage from "./pages/SearchPage"
 import HomePage from "./pages/HomePage"
 import SignupPage from "./pages/SignupPage"
+import MovieDetailsPage from "./pages/MovieDetailsPage"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}> 
           <Route index element={<LoginPage />} />
+          <Route path='movie/:id' element={<MovieDetailsPage />} />
           <Route path='signup' element={<SignupPage />} />
           <Route path='home' element={<HomePage />} />
           <Route path='search' element={<SearchPage />} />
