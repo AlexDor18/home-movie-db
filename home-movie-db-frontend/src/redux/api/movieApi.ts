@@ -32,8 +32,18 @@ export const movieApi = createApi({
                 }
             }),
             invalidatesTags: ["Movie"]
-        })
+        }),
+        deleteMovieById: build.mutation<void, string>({
+            query: (movieId) => ({
+                url: `/${movieId}`,
+                method: "DELETE",
+                headers: {
+                    "X-XSRF-TOKEN": document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, '$1')
+                }
+            }),
+            invalidatesTags: ["Movie"]
+        }),
     })
 });
 
-export const { useGetAllMoviesQuery, useGetMovieByIdQuery, usePostAddMoveByIdMutation } = movieApi;
+export const { useGetAllMoviesQuery, useGetMovieByIdQuery, usePostAddMoveByIdMutation, useDeleteMovieByIdMutation } = movieApi;
