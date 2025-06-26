@@ -315,4 +315,95 @@ class ApplicationIT {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Star Wars: Episode IV - A New Hope"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.genres[0]").value("Science Fiction"));
     }
+
+    @Test
+    @WithUserDetails("default_user")
+    @SneakyThrows
+    void testAddAndDeleteMovie() {
+        // --- Mock TMDB API responses ---
+        TmdbGenreMessage scienceFictionGenre = new TmdbGenreMessage(1, "Science Fiction");
+        TmdbGenreListMessage genres = new TmdbGenreListMessage();
+        genres.setGenres(List.of(scienceFictionGenre));
+
+        TmdbMovieDetailsMessage starWarsEpisodeIV = new TmdbMovieDetailsMessage();
+        starWarsEpisodeIV.setAdult(false);
+        starWarsEpisodeIV.setBackdrop_path("/path/to/starwars1/backdrop.jpg");
+        starWarsEpisodeIV.setBudget(20000000);
+        starWarsEpisodeIV.setGenres(List.of(scienceFictionGenre));
+        starWarsEpisodeIV.setHomepage("https://www.starwars.com");
+        starWarsEpisodeIV.setId(11);
+        starWarsEpisodeIV.setImdb_id("tt0076759");
+        starWarsEpisodeIV.setOriginal_language("en");
+        starWarsEpisodeIV.setOriginal_title("Star Wars: Episode IV - A New Hope");
+        starWarsEpisodeIV.setOverview("In a galaxy far, far away...");
+        starWarsEpisodeIV.setPopularity(10.0);
+        starWarsEpisodeIV.setPoster_path("/path/to/starwars1/poster.jpg");
+        starWarsEpisodeIV.setProduction_companies(new ArrayList<>());
+        starWarsEpisodeIV.setProduction_countries(new ArrayList<>());
+        starWarsEpisodeIV.setRelease_date(LocalDate.parse("1977-05-25", DateTimeFormatter.ISO_DATE).toString());
+        starWarsEpisodeIV.setRevenue(100000000);
+        starWarsEpisodeIV.setRuntime(121);
+        starWarsEpisodeIV.setSpoken_languages(new ArrayList<>());
+        starWarsEpisodeIV.setStatus("Released");
+        starWarsEpisodeIV.setTagline("May the Force be with you.");
+        starWarsEpisodeIV.setTitle("Star Wars: Episode IV - A New Hope");
+        starWarsEpisodeIV.setVideo(false);
+        starWarsEpisodeIV.setVote_average(8.1);
+        starWarsEpisodeIV.setVote_count(1000);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Mock /movie/11
+        mockServerClient
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/movie/11")
+                                .withQueryStringParameter("language", "de-DE")
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withContentType(org.mockserver.model.MediaType.APPLICATION_JSON)
+                                .withBody(objectMapper.writeValueAsString(starWarsEpisodeIV))
+                );
+
+        // Mock /genre/movie/list
+        mockServerClient
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/genre/movie/list")
+                                .withQueryStringParameter("language", "de-DE")
+                )
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withContentType(org.mockserver.model.MediaType.APPLICATION_JSON)
+                                .withBody(objectMapper.writeValueAsString(genres))
+                );
+
+        // --- Add movie ---
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/movies/11").with(csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Star Wars: Episode IV - A New Hope"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.genres[0]").value("Science Fiction"));
+
+        // --- Check movie is present ---
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/movies").with(csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].title").value("Star Wars: Episode IV - A New Hope"));
+
+        // --- Delete movie ---
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/movies/11").with(csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        // --- Check movie is gone ---
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/movies").with(csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isEmpty());
+    }
+
+    
 }
