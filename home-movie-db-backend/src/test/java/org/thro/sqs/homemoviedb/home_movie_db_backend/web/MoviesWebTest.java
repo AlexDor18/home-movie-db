@@ -80,4 +80,24 @@ class MoviesWebTest {
         Assertions.assertEquals("Movie 1", result.getTitle());
         Assertions.assertEquals("Overview 1", result.getOverview());
     }
+
+    @Test
+    void deleteMovieByIdTest() {
+        MovieDTO movie = new MovieDTO();
+        movie.setId(1L);
+        movie.setTitle("Movie 1");
+        Mockito.when(publicMovies.getMovieById(1L)).thenReturn(movie);
+
+        sut.deleteMovieById("1");
+
+        Mockito.verify(publicMovies).deleteMovieById(1L);
+    }
+
+    @Test
+    void deleteMovieByIdNotFoundTest() {
+        Mockito.when(publicMovies.getMovieById(1L)).thenReturn(null);
+
+        Assertions.assertThrows(MovieNotFoundException.class, () -> sut.deleteMovieById("1"));
+        Mockito.verify(publicMovies, Mockito.never()).deleteMovieById(Mockito.anyLong());
+    }
 }

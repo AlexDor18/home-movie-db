@@ -2,6 +2,7 @@ package org.thro.sqs.homemoviedb.home_movie_db_backend.web.resources;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,5 +56,16 @@ public class MoviesWeb {
         final MovieDTO savedMovie =  this.movies.saveMovieById(Long.parseLong(id));
         
         return this.mapper.mapToMovieMessage(savedMovie);
+    }
+
+    @DeleteMapping("/movies/{id}")
+    public void deleteMovieById(@PathVariable("id") String id) {
+        final MovieDTO movie = this.movies.getMovieById(Long.parseLong(id));
+
+        if(movie == null) {
+            throw new MovieNotFoundException("Movie with id " + id + " not found");
+        }
+        
+        this.movies.deleteMovieById(Long.parseLong(id));
     }
 }

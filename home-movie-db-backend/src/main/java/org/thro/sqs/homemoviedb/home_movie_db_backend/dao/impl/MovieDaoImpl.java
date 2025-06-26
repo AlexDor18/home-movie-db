@@ -12,6 +12,7 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.dao.MovieDa
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.MovieRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.UserRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.mapper.MovieDaoMapper;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserNotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -80,5 +81,22 @@ public class MovieDaoImpl implements MovieDao{
         }
 
         return this.movieMapper.toMovieDTOList(user.getMovies());
+    }
+
+    @Override
+    public void deleteMovieById(Long id, Long userId) throws UserNotFoundException {
+        UserEntity user = userRepository.findById(userId).orElse(null);
+
+        if(user == null) {
+            throw new UserNotFoundException("User with id " + userId + " not found");
+        }
+
+        final boolean removed = user.getMovies().removeIf(m -> m.getId().equals(id));
+
+        if(!removed) {
+            throw new MovieNotFoundException("Movie with id " + id + " not found for user with id " + userId);
+        }
+
+        this.userRepository.saveAndFlush(user);
     }
 }

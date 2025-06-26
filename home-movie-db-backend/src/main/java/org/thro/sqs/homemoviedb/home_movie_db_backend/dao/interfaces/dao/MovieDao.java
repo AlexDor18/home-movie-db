@@ -12,4 +12,6 @@ public interface MovieDao {
     void saveMovieForUser(MovieDTO movie, Long userId) throws UserNotFoundException;
 
     List<MovieDTO> getAllMoviesForUser(Long userId);
+
+    void deleteMovieById(Long id, Long userId) throws UserNotFoundException;
 }
