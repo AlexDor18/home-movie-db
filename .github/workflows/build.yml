@@ -103,12 +103,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd home-movie-db-frontend
+          cd home-movie-db-e2e/playwright
           npm ci
 
       - name: Install Playwright Browsers
         run: |
-          cd home-movie-db-frontend
+          cd home-movie-db-e2e/playwright
           npx playwright install --with-deps
 
       - name: Wait for backend to be reachable
@@ -126,5 +126,5 @@ jobs:
 
       - name: Run Playwright tests
         run: |
-          cd home-movie-db-frontend
+          cd home-movie-db-e2e/playwright
           npx playwright test
