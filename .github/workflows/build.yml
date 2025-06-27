@@ -89,3 +89,42 @@ jobs:
       - name: Tear down Docker Compose
         if: always()
         run: docker compose down
+  playwright:
+    name: Playwright E2E Tests
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd home-movie-db-frontend
+          npm ci
+
+      - name: Install Playwright Browsers
+        run: |
+          cd home-movie-db-frontend
+          npx playwright install --with-deps
+
+      - name: Wait for backend to be reachable
+        run: |
+          for i in {1..30}; do
+            if curl -sSf http://localhost:8080/actuator/health > /dev/null; then
+              echo "Backend is reachable."
+              exit 0
+            fi
+            echo "Backend not yet reachable, retrying in 2s..."
+            sleep 2
+          done
+          echo "Backend failed to become reachable."
+          exit 1
+
+      - name: Run Playwright tests
+        run: |
+          cd home-movie-db-frontend
+          npx playwright test
