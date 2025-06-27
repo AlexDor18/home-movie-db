@@ -6,6 +6,9 @@ const userFile = path.join(__dirname, '../.auth/user.json');
 const authFile = path.join(__dirname, '../.auth/auth.json');
 
 setup('authenticate', async ({ page }) => {
+  await page.screenshot({ path: 'debug-signup.png' });
+  console.log(await page.content());
+
     if (!fs.existsSync(userFile)) {
       await page.goto('/signup');
       await page.getByPlaceholder('Vorname').fill('Playwright');
