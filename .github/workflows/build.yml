@@ -133,6 +133,12 @@ jobs:
           echo "Backend failed to become reachable."
           exit 1
 
+      - name: check docker container ip
+        run: |
+          echo "Docker container IPs:"
+          docker network inspect home-movie-db_default | echo
+
+
       - name: Run Playwright tests
         run: |
           cd home-movie-db-e2e/playwright
