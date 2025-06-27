@@ -124,6 +124,7 @@ jobs:
           for i in {1..30}; do
             if curl -sSf http://localhost:8080/actuator/health > /dev/null; then
               echo "Backend is reachable."
+              echo curl -sSf http://localhost:8080/
               exit 0
             fi
             echo "Backend not yet reachable, retrying in 2s..."
