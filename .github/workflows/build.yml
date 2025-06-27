@@ -122,9 +122,9 @@ jobs:
       - name: Wait for backend to be reachable
         run: |
           for i in {1..30}; do
-            if curl -sSf http://172.18.0.3:8080/actuator/health > /dev/null; then
+            curl -f http://localhost:8080/actuator/health
+            if curl -sSf http://localhost:8080/actuator/health > /dev/null; then
               echo "Backend is reachable."
-              curl -sSf http://172.18.0.3:8080/ | echo
               exit 0
             fi
             echo "Backend not yet reachable, retrying in 2s..."
@@ -132,12 +132,6 @@ jobs:
           done
           echo "Backend failed to become reachable."
           exit 1
-
-      - name: check docker container ip
-        run: |
-          echo "Docker container IPs:"
-          docker network inspect home-movie-db_default
-
 
       - name: Run Playwright tests
         run: |
