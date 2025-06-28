@@ -125,4 +125,33 @@ class MoviesImplTest {
         Assertions.assertEquals(1, result.size());
         Assertions.assertEquals("unittest", result.get(0).getTitle());
     }
+
+    @Test
+    void deleteMovieById_shouldDeleteMovieForAuthenticatedUser() {
+        MovieDTO demoMovie = new MovieDTO(){{
+            setId(1L);
+            setOverview("unittest");
+            setTitle("unittest");
+            setThumbnailUrl("");
+        }};
+        UserDto user = new UserDto(){{
+            setId(42L);
+            setUsername("testuser");
+        }};
+
+        Mockito.when(this.movieDaoMock.getMovieById(1L)).thenReturn(demoMovie);
+        Mockito.when(this.userServiceMock.getAuthenticatedUser()).thenReturn(user);
+
+        this.sut.deleteMovieById(1L);
+
+        Mockito.verify(this.movieDaoMock).deleteMovieById(1L, 42L);
+    }
+
+    @Test
+    void deleteMovieById_shouldThrowIfMovieNotFound() {
+        Mockito.when(this.movieDaoMock.getMovieById(1L)).thenReturn(null);
+
+        Assertions.assertThrows(MovieNotFoundException.class, () -> this.sut.deleteMovieById(1L));
+        Mockito.verify(this.movieDaoMock, Mockito.never()).deleteMovieById(Mockito.anyLong(), Mockito.anyLong());
+    }
 }

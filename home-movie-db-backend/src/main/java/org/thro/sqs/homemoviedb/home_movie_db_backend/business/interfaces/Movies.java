@@ -13,4 +13,6 @@ public interface Movies {
     public MovieDTO saveMovieById(Long id);
 
     public List<MovieDTO> searchMovieByQuery(String query, boolean adult);
+
+    public void deleteMovieById(Long id);
 }

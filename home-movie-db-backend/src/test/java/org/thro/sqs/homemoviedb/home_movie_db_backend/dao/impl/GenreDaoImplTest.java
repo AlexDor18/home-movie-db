@@ -95,6 +95,32 @@ class GenreDaoImplTest {
     }
 
     @Test
+    void saveGenres_shouldSaveOnlyMissingGenres() {
+        // Given two genres, one exists, one does not
+        GenreDTO genreDto2 = new GenreDTO();
+        genreDto2.setId(2L);
+        genreDto2.setName("Comedy");
+
+        GenresEntity genreEntity2 = new GenresEntity();
+        genreEntity2.setId(2L);
+        genreEntity2.setName("Comedy");
+
+        List<GenreDTO> genres = List.of(genreDto, genreDto2);
+        List<GenresEntity> existingEntities = List.of(genreEntity); // Only genreEntity (id=1) exists
+
+        Mockito.when(genreRepositoryMock.findAllById(List.of(1L, 2L))).thenReturn(existingEntities);
+
+        // Only missing genre should be mapped and saved
+        List<GenresEntity> toSave = List.of(genreEntity2);
+        Mockito.when(movieMapperMock.toGenresEntityList(List.of(genreDto2))).thenReturn(toSave);
+
+        sut.saveGenres(genres);
+
+        Mockito.verify(genreRepositoryMock).saveAllAndFlush(toSave);
+        Mockito.verify(movieMapperMock).toGenresEntityList(List.of(genreDto2));
+    }
+
+    @Test
     void saveGenre_shouldHandleNullGenre() {
         sut.saveGenre(null);
         Mockito.verifyNoInteractions(genreRepositoryMock);
@@ -111,4 +137,6 @@ class GenreDaoImplTest {
         Mockito.verifyNoInteractions(genreRepositoryMock);
         Mockito.verifyNoInteractions(movieMapperMock);
     }
+
+    
 }

@@ -70,4 +70,16 @@ public class MoviesImpl implements Movies {
     public List<MovieDTO> searchMovieByQuery(String query, boolean adult) {
         return this.movieInformations.searchMovieByQuery(query, adult);
     }
+
+    @Override
+    public void deleteMovieById(Long id) {
+        final MovieDTO movie = this.getMovieById(id);
+        final UserDto user = this.userService.getAuthenticatedUser();
+        
+        if(movie == null) {
+            throw new MovieNotFoundException("Movie with id " + id + " not found");
+        }
+        
+        this.movieDao.deleteMovieById(id, user.getId());
+    }
 }

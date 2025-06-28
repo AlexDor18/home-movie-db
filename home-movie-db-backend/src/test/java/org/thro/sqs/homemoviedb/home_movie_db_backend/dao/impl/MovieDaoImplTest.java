@@ -22,6 +22,7 @@ import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.interfaces.repository.UserRepository;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.dao.mapper.MovieDaoMapper;
 import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.UserNotFoundException;
+import org.thro.sqs.homemoviedb.home_movie_db_backend.exceptions.MovieNotFoundException;
 
 @ExtendWith(MockitoExtension.class)
 class MovieDaoImplTest {
@@ -170,5 +171,48 @@ class MovieDaoImplTest {
         Assertions.assertThrows(UserNotFoundException.class, 
             () -> this.sut.saveMovieForUser(newMovie, 1L)
         );
+    }
+
+    @Test
+    void deleteMovieByIdTest() {
+        MovieEntity movie1 = new MovieEntity(){{
+            setId(123L);
+            setOverview("unittest");
+            setTitle("unittest");
+            setThumbnailUri("");
+        }};
+        List<MovieEntity> movies = new ArrayList<>();
+        movies.add(movie1);
+
+        UserEntity user1 = new UserEntity(){{
+            setId(1L);
+            setMovies(movies);
+        }};
+
+        Mockito.when(this.userRepositoryMock.findById(1L)).thenReturn(Optional.of(user1));
+
+        this.sut.deleteMovieById(123L, 1L);
+
+        Assertions.assertTrue(user1.getMovies().isEmpty());
+        Mockito.verify(this.userRepositoryMock).saveAndFlush(user1);
+    }
+
+    @Test
+    void deleteMovieById_UserNotFound() {
+        Mockito.when(this.userRepositoryMock.findById(1L)).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(UserNotFoundException.class, () -> this.sut.deleteMovieById(123L, 1L));
+    }
+
+    @Test
+    void deleteMovieById_MovieNotFoundForUser() {
+        UserEntity user1 = new UserEntity(){{
+            setId(1L);
+            setMovies(new ArrayList<>());
+        }};
+        Mockito.when(this.userRepositoryMock.findById(1L)).thenReturn(Optional.of(user1));
+
+        Assertions.assertThrows(MovieNotFoundException.class,
+            () -> this.sut.deleteMovieById(123L, 1L));
     }
 }

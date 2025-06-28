@@ -43,11 +43,11 @@ public class GenreDaoImpl implements GenreDao {
             log.warn("No genres to save, skipping.");
             return;
         }
-        List<GenresEntity> genresEntities = genreRepository.findAllById(genres.stream().map(GenreDTO::getId).toList());
+        List<GenresEntity> existingGenresEntities = genreRepository.findAllById(genres.stream().map(GenreDTO::getId).toList());
 
-        List<GenreDTO> missingGenresEntities = genres.stream().filter(g -> !genresEntities.stream().map(GenresEntity::getId).toList().contains(g.getId())).toList();
+        List<GenreDTO> missingGenresEntities = genres.stream().filter(g -> !existingGenresEntities.stream().map(GenresEntity::getId).toList().contains(g.getId())).toList();
 
-        if(genresEntities.isEmpty()) {
+        if(!missingGenresEntities.isEmpty()) {
             genreRepository.saveAllAndFlush(this.movieMapper.toGenresEntityList(missingGenresEntities));
         }
     }
