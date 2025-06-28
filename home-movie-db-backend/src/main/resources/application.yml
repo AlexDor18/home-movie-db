@@ -3,7 +3,7 @@ spring:
         name: home-movie-db  
     jpa:
         hibernate:
-            ddl-auto: update
+            ddl-auto: create-drop
 tmdb:
     apiKey: ${TMDB_API_KEY}
     apiUrl: https://api.themoviedb.org/3
