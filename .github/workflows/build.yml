@@ -29,6 +29,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B install --file pom.xml
+
   sonar:
     name: Run sonar checks
     needs: build
@@ -59,6 +60,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B install -Pcoverage org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=AlexDor18_home-movie-db
+
   docker:
     name: Test docker compose
     needs: build
@@ -74,18 +76,83 @@ jobs:
           docker compose up -d
       - name: Wait for Webserver to be reachable
         run: |
-          echo "Waiting for webserver to be reachable...."
+          echo "Waiting for backend to be reachable..."
           for i in {1..30}; do
-            if curl -sSf http://localhost:8080/actuator/health > /dev/null; then
-              echo "Webserver is reachable."
+            response=$(curl -sSf http://localhost:8080/actuator/health || true)
+            echo "$response"
+            if [ -n "$response" ]; then
+              echo "Backend is reachable."
               exit 0
             fi
-            echo "Webserver not yet reachable, retrying in 2s..."
+            echo "Backend not yet reachable, retrying in 2s..."
             sleep 2
           done
-          echo "Webserver failed to become reachable."
-          docker compose logs
+          echo "Backend failed to become reachable."
           exit 1
+      - name: Tear down Docker Compose
+        if: always()
+        run: docker compose down
+
+  playwright:
+    name: Playwright E2E Tests
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd home-movie-db-e2e/playwright
+          npm ci
+
+      - name: Install Playwright Browsers
+        run: |
+          cd home-movie-db-e2e/playwright
+          npx playwright install --with-deps
+
+      - name: Set up Docker Compose
+        uses: docker/setup-compose-action@v1
+        with:
+          version: latest
+
+      - name: Start Docker Compose
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: docker compose up -d
+
+      - name: Wait for backend to be reachable
+        run: |
+          echo "Waiting for backend to be reachable..."
+          for i in {1..30}; do
+            response=$(curl -sSf http://localhost:8080/actuator/health || true)
+            echo "$response"
+            if [ -n "$response" ]; then
+              echo "Backend is reachable."
+              exit 0
+            fi
+            echo "Backend not yet reachable, retrying in 2s..."
+            sleep 2
+          done
+          echo "Backend failed to become reachable."
+          exit 1
+
+      - name: Run Playwright tests
+        run: |
+          cd home-movie-db-e2e/playwright
+          npx playwright test
+
+      - name: Upload Playwright screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-screenshots
+          path: home-movie-db-e2e/playwright/test-results/
+
       - name: Tear down Docker Compose
         if: always()
         run: docker compose down

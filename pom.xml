@@ -13,8 +13,8 @@
   <description>Docker application for managing your movies at home</description>
 
   <modules>
-      <module>home-movie-db-backend</module>
-      <module>home-movie-db-frontend</module>
+    <module>home-movie-db-frontend</module>
+    <module>home-movie-db-backend</module>
   </modules>
 
   <properties>

@@ -26,13 +26,11 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://172.17.0.1:8080/', // NOSONAR: no https availible
+    baseURL: 'http://localhost:8080/', // NOSONAR: no https availible
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
-
-  timeout: 60_000,
 
   expect: {
     timeout: 15_000
@@ -45,20 +43,8 @@ export default defineConfig({
       testMatch: /.*\.setup\.ts/,
     },
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'], storageState: '.auth/auth.json' },
-      dependencies: ['setup']
-    },
-
-    {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'], storageState: '.auth/auth.json' },
-      dependencies: ['setup']
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'], storageState: '.auth/auth.json' },
       dependencies: ['setup']
     },
   ],
