@@ -99,6 +99,12 @@
 		    <artifactId>mockserver-spring-test-listener-no-dependencies</artifactId>
 		    <version>5.15.0</version>
 		</dependency>
+		<dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${org.mapstruct.version}</version>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
