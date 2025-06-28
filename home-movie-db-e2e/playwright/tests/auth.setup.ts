@@ -7,12 +7,14 @@ const authFile = path.join(__dirname, '../.auth/auth.json');
 
 setup('authenticate', async ({ page }) => {
     if (!fs.existsSync(userFile)) {
+      await page.screenshot({ path: 'init.png' });
       await page.goto('/signup');
       await page.getByPlaceholder('Vorname').fill('Playwright');
       await page.getByPlaceholder('Nachname').fill('User');
       await page.getByPlaceholder('Username').fill('playwrightuser');
       await page.getByPlaceholder('Password').fill('password123');
       await page.getByRole('button', { name: 'Registrieren' }).click();
+      await page.screenshot({ path: 'registered.png' });
       await page.waitForURL('/');
 
       // End of user creation steps.
@@ -24,6 +26,7 @@ setup('authenticate', async ({ page }) => {
   await page.goto('/');
   await page.getByLabel('Username').fill('playwrightuser');
   await page.getByLabel('Password').fill('password123');
+  await page.screenshot({ path: 'login.png' });
   await page.getByRole('button', { name: 'Login' }).click();
   // Wait until the page receives the cookies.
   //
