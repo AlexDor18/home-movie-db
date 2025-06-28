@@ -122,8 +122,9 @@ jobs:
       - name: Wait for backend to be reachable
         run: |
           for i in {1..30}; do
-            curl -sSf http://localhost:8080/actuator/health
-            if curl -sSf http://localhost:8080/actuator/health > /dev/null; then
+            response=$(curl -sSf http://localhost:8080/actuator/health || true)
+            echo "$response"
+            if [ -n "$response" ]; then
               echo "Backend is reachable."
               exit 0
             fi
