@@ -5,7 +5,9 @@ Home Movie Database is a web application designed to manage and organize your pe
 
 # Getting started
 
-# TODO: addre prerequisits
+## System requirements
+To run home-movie-db you need docker and docker-compose to be installed on your system. Also you need a internet connection on your system to install all components required by the container. You need also a internet connection to retriven informations from The Movie Database (TMDB).
+
 
 ## TMDB API Key
 To run home-movie-db you have create an account at [The Movie Database (TMDB)](https://www.themoviedb.org/signup?language=de).
