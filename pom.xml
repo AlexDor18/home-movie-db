@@ -17,6 +17,10 @@
     <module>home-movie-db-backend</module>
   </modules>
 
+  <scm>
+    <developerConnection>scm:git:https://github.com/AlexDor18/home-movie-db.git</developerConnection>
+  </scm>
+
   <properties>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
@@ -106,6 +110,11 @@
                 </goals>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+            <version>3.1.1</version>
           </plugin>
         </plugins>
       </build>
