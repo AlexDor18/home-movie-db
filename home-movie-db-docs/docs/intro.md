@@ -20,6 +20,6 @@ In the docker compose file are default db access keys set. Replace them with new
 
 ## Run application with docker-compose
 To run the application with docker-compose just run ```docker-compose up``` from the root of this repository.
-When all all actions are performed successfully the application can be accessed form [localhost](http://{host}:8080).
+When all all actions are performed successfully the application can be accessed form [localhost](http://localhost:8080).
 
 
