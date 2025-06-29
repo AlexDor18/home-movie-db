@@ -7,29 +7,29 @@ sidebar_position: 2
 
 ## Organisational Constraints
 
-- Der Source-Code muss in einem **öffentlichen Github-Repository** liegen.
-- Die **Dokumentation** muss nach dem **arc42-Standard** erfolgen und öffentlich einsehbar (z.B. auf readthedocs) sein.
-- **Wichtige Architekturentscheidungen** sind in **ADRs** festzuhalten.
+- The source code must be in a **public Github repository**.
+- The **documentation** must follow the **arc42 standard** and be publicly accessible (e.g., on readthedocs).
+- **Important architectural decisions** must be recorded in **ADRs**.
 
 ## Technological Constraints
 
-- Erlaubte Programmiersprachen: **Java, C#, Python, TypeScript**
-- **Frontend, Backend und Persistenzschicht** (z.B. Datenbank) müssen als getrennte Schichten implementiert werden.
-- Das Backend muss mit **mindestens einem externen Service** (z.B. Google-APIs, TMDB) kommunizieren.
-- Es muss **mindestens ein öffentlich erreichbarer Endpunkt** und **mindestens ein abgesicherter Endpunkt** (z.B. Login) existieren.
-- **ChatGPT/Copilot** sind als Hilfsmittel erlaubt, dürfen aber nicht den gesamten Projektinhalt generieren.
+- Allowed programming languages: **Java, C#, Python, TypeScript**
+- **Frontend, backend, and persistence layer** (e.g., database) must be implemented as separate layers.
+- The backend must communicate with **at least one external service** (e.g., Google APIs, TMDB).
+- There must be **at least one publicly accessible endpoint** and **at least one secured endpoint** (e.g., login).
+- **ChatGPT/Copilot** are allowed as tools, but must not generate the entire project content.
 
 ## Quality Constraints
 
-- Die Software muss ein **dokumentiertes und implementiertes Testkonzept** besitzen, das die komplette Testpyramide abdeckt:
-    - **Unit-Tests**
-    - **Integration-Tests**
-    - **End-to-End-Tests**
-    - **Penetrationstests** (z.B. Integrationstest der Sicherheitslogik)
-- Es muss eine **lauffähige Github-Pipeline** existieren.
-- Ein Tool zur **statischen Codeanalyse** darf keine offenen Issues zeigen und die **Testabdeckung** muss mindestens **80%** betragen.
-- Für die Anbindung externer Services sind **ausfallsichere Architekturpatterns** zu verwenden.
-- Das Projekt muss **öffentlich zugänglich** und nach dem Auschecken mit **maximal zwei Befehlen lauffähig** sein (z.B. via Docker Compose oder Shellscript).
+- The software must have a **documented and implemented test concept** covering the entire test pyramid:
+    - **Unit tests**
+    - **Integration tests**
+    - **End-to-end tests**
+    - **Penetration tests** (e.g., integration test of the security logic)
+- There must be a **working Github pipeline**.
+- A tool for **static code analysis** must show no open issues and **test coverage** must be at least **80%**.
+- **Resilient architectural patterns** must be used for connecting external services.
+- The project must be **publicly accessible** and, after checkout, runnable with a **maximum of two commands** (e.g., via Docker Compose or shell script).
 
 
 

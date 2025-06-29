@@ -7,39 +7,39 @@ sidebar_position: 6
 ## Search Movie {#search-movie}
 ![search movie diagram](/arc42/searchFlowDiagram.png)
 
-Der Benutzer sucht nach einem Film über die REST-API. Die Anfrage wird durch Spring Security authentifiziert und vom SearchWeb Controller entgegengenommen. Der MoviesService nutzt den MovieAdapter (z.B. TmdbMovieInformations), um die TMDB API abzufragen. Die Antwort wird gemappt und als Liste von MovieMessages an den Benutzer zurückgegeben.
+The user searches for a movie via the REST API. The request is authenticated by Spring Security and handled by the SearchWeb Controller. The MoviesService uses the MovieAdapter (e.g., TmdbMovieInformations) to query the TMDB API. The response is mapped and returned to the user as a list of MovieMessages.
 
 ---
 
 ## Add Movie {#add-movie}
 ![add movie diagram](/arc42/saveMovieFlowDiagram.png)
 
-Beim Hinzufügen eines Films sendet der Benutzer eine Anfrage an die REST-API. Nach Authentifizierung wird die Anfrage vom MoviesWeb Controller an den MoviesService weitergeleitet. Der MovieAdapter fragt die TMDB API ab, mappt die Antwort und speichert den Film über das MovieRepository in der Datenbank. Das Ergebnis wird als MovieMessage zurückgegeben.
+When adding a movie, the user sends a request to the REST API. After authentication, the request is forwarded by the MoviesWeb Controller to the MoviesService. The MovieAdapter queries the TMDB API, maps the response, and stores the movie in the database via the MovieRepository. The result is returned as a MovieMessage.
 
 ---
 
 ## Delete Movie {#delete-movie}
 ![delte movie diagram](/arc42/deleteMovieFlowDiagram.png)
 
-Der Benutzer löscht einen Film über die REST-API. Nach Authentifizierung wird die Anfrage vom MoviesWeb Controller an den MoviesService weitergegeben, der das MovieRepository nutzt, um den Film aus der Datenbank zu entfernen. Der Status wird an den Benutzer zurückgegeben.
+The user deletes a movie via the REST API. After authentication, the request is forwarded by the MoviesWeb Controller to the MoviesService, which uses the MovieRepository to remove the movie from the database. The status is returned to the user.
 
 ---
 
 ## User Login {#login}
 ![login diagram](/arc42/loginFlowDiagram.png)
 
-Der Benutzer meldet sich über die REST-API an. Die Authentifizierung erfolgt durch Spring Security. Bei Erfolg erhält der Benutzer ein Token oder eine Session.
+The user logs in via the REST API. Authentication is handled by Spring Security. If successful, the user receives a token or session.
 
 ---
 
 ## Get Movies {#get-all-movies}
 ![get all movies diagram](/arc42/getAllMoviesFlowDiagram.png)
 
-Der Benutzer fragt seine Filmliste über die REST-API ab. Nach Authentifizierung wird die Anfrage vom MoviesWeb Controller an den MoviesService weitergeleitet, der die Filme aus der Datenbank liest und als MovieMessage-Liste zurückgibt.
+The user requests their movie list via the REST API. After authentication, the request is forwarded by the MoviesWeb Controller to the MoviesService, which reads the movies from the database and returns them as a list of MovieMessages.
 
 ---
 
 ## User Registration {#new-user}
 ![new user diagram](/arc42/newUserFlowDiagram.png)
 
-Der Benutzer registriert sich über die REST-API. Der LoginWeb Controller mappt die Anfrage und ruft den UserServiceImpl auf. Es wird geprüft, ob der Benutzername bereits existiert. Falls nicht, wird ein neuer Benutzer angelegt und gespeichert. Die Antwort enthält die
+The user registers via the REST API. The LoginWeb Controller maps the request and calls the UserServiceImpl. It checks whether the username already exists. If not, a new user is created and saved. The response contains the user data or an error message if the name is already taken.

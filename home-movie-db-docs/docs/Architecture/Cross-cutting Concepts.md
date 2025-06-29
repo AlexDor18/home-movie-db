@@ -5,4 +5,4 @@ sidebar_position: 8
 # Cross-cutting Concepts {#section-concepts}
 
 ## Authentication
-Spring Security Form Authentication are used to authenticate an user on the system. An authenticated user is required to use most features of the application.
+Spring Security Form Authentication is used to authenticate a user on the system. An authenticated user is required to use most features of the application.
