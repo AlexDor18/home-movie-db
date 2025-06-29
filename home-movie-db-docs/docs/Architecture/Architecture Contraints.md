@@ -5,131 +5,32 @@ sidebar_position: 2
 
 # Architecture Constraints {#section-architecture-constraints}
 
-## Backend Server (ADR-0000)
+## Organisational Constraints
 
-### Context and Problem Statement
+- The source code must be in a **public Github repository**.
+- The **documentation** must follow the **arc42 standard** and be publicly accessible (e.g., on readthedocs).
+- **Important architectural decisions** must be recorded in **ADRs**.
 
-The Requirments of this project are that a backend need to process data from an external resource. Also the backend need to store data in a persistance layer.
-Also some requests made to the server needs to be protected.
+## Technological Constraints
 
-### Considered Options
+- Allowed programming languages: **Java, C#, Python, TypeScript**
+- **Frontend, backend, and persistence layer** (e.g., database) must be implemented as separate layers.
+- The backend must communicate with **at least one external service** (e.g., Google APIs, TMDB).
+- There must be **at least one publicly accessible endpoint** and **at least one secured endpoint** (e.g., login).
+- **ChatGPT/Copilot** are allowed as tools, but must not generate the entire project content.
 
-* Spring Boot
-* Jakarta EE Server
-* Express JS Server
+## Quality Constraints
 
-### Decision Outcome
+- The software must have a **documented and implemented test concept** covering the entire test pyramid:
+    - **Unit tests**
+    - **Integration tests**
+    - **End-to-end tests**
+    - **Penetration tests** (e.g., integration test of the security logic)
+- There must be a **working Github pipeline**.
+- A tool for **static code analysis** must show no open issues and **test coverage** must be at least **80%**.
+- **Resilient architectural patterns** must be used for connecting external services.
+- The project must be **publicly accessible** and, after checkout, runnable with a **maximum of two commands** (e.g., via Docker Compose or shell script).
 
-Chosen option: "Spring Boot", because Spring Boot Server are more easily to setup and provide featues for most of the named requirements.
 
-## Frontend Framework (ADR-0001)
 
-### Context and Problem Statement
 
-The Frontend needs to use a backend server to retrive data via REST and show them to the user.
-
-### Considered Options
-
-* React
-* Angular
-* Vue
-
-### Decision Outcome
-
-Chosen option: "React", because the involved programmer is familiar with this technology.
-
-## Frontend Provisioning (ADR-0002)
-
-### Context and Problem Statement
-
-The generated frontend files need to be provided by an server. 
-All browser needs to load the files via this server.
-Also this Server has to be able to redirect URL request that are not provieded by the server to the index.html at root directory.
-
-### Considered Options
-
-* Nginx
-* Apache Tomcat
-* NextJS
-* Spring Boot
-
-### Decision Outcome
-
-Chosen option: "Spring Boot", because the whole project can be processed via maven and be packaged in a single jar file which can be used in a docker file.
-
-## Database (ADR-0003)
-
-### Context and Problem Statement
-
-Data needs to be stored in Database. It has to decided which database scheme will be used.
-
-### Considered Options
-
-* SQL
-* NoSQL
-
-### Decision Outcome
-
-Chosen option: "SQL", because the developer is more familiar with sql DBs.
-
-## Frontend Client-Store (ADR-0004)
-
-### Context and Problem Statement
-
-Data from backend needs to be used by multiple components in this application. So external data needs to be
-
-### Considered Options
-
-* Redux
-* Tanstack Query
-
-### Decision Outcome
-
-Chosen option: "Redux", because both libraries have similar features and most developer are familiar with redux.
-
-## TMDB Adapter Implementation (ADR-0005)
-
-### Context and Problem Statement
-
-There are several possibilities to implement the Adapter to TMDB.
-
-### Considered Options
-
-* Spring REST Client
-* TMDB Libraray
-
-### Decision Outcome
-
-Chosen option: "Spring REST Client", because only few featre of the library are required and can be better manged by self implemented adapter.
-
-## Database Management (ADR-0006)
-
-### Context and Problem Statement
-
-The database of the project needs to be created on initialization of the server. It needs to be decided which technology needs to be used to mangage the database
-
-### Considered Options
-
-* JPA
-* Flyway
-* Custom SQL Script
-
-### Decision Outcome
-
-Chosen option: "JPA", because this project will contain its own database and doesn't need to be connected to multiple databases.
-
-## Authetication Mechanism (ADR-0007)
-
-### Context and Problem Statement
-
-To show user related content a user has to autheticate himself. A mechanism is needed to authenticate a user
-
-### Considered Options
-
-* Form Login
-* Basic Auth
-* JWT / OIDC
-
-### Decision Outcome
-
-Chosen option: "Form Login", because it is a standalone application which does not need the same auth mechanism on mutliple applications. Also for jwt a identity provider needed to be configured.

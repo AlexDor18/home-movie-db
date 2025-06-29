@@ -1,0 +1,44 @@
+---
+sidebar_label: 'Risks and Technical Debts'
+sidebar_position: 11
+---
+# Risks and Technical Debts \{#section-risks-and-technical-debts}
+
+## Technical Risks \{#section-technical-risks}
+
+<table>
+    <thead>
+        <tr>
+        <th>Risk</th>
+        <th>Probability</th>
+        <th>Impact</th>
+        <th>Mitigation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Dependency on external TMDB API</td>
+            <td>Medium</td>
+            <td>High</td>
+            <td>Implement caching and fallback mechanisms.</td>
+        </tr>
+        <tr>
+            <td>Database performance issues with large datasets</td>
+            <td>Low</td>
+            <td>High</td>
+            <td>Optimize database queries and use indexing. Cleaning of unused datasets.</td>
+        </tr>
+        <tr>
+            <td>Security vulnerabilities in third-party libraries</td>
+            <td>Medium</td>
+            <td>High</td>
+            <td>Regularly update dependencies and perform security audits.</td>
+        </tr>
+    </tbody>
+</table>
+
+## Technical Debts \{#section-technical-debts}
+
+### Authentication and Authorization
+The application uses Spring Security Form Authentication. This should be replaced with an OIDC
+authentication follow to make shift the user management to an external identity provider.

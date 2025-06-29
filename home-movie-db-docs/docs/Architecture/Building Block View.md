@@ -6,74 +6,49 @@ sidebar_position: 5
 
 ## Whitebox Overall System {#_whitebox_overall_system}
 
-***\<Overview Diagram>***
+![c4 system context diagram](/c4Diagrams/c4-system-context.png)
 
-Motivation
+#### Motivation
+Motivation: The application should focus on managing the needs of the user and not managing the complete environment around movies and series.
 
-:   *\<text explanation>*
+#### Contained Building Blocks
+Home Movie DB:
+Managing the movies relevant for the users.
 
-Contained Building Blocks
+TMDB:
+Service which provides all information about movies and series.
 
-:   *\<Description of contained building block (black boxes)>*
 
-Important Interfaces
+## Level 1
+![c4 container diagram](/c4Diagrams/c4-container.png)
 
-:   *\<Description of important interfaces>*
+### Webanwendung {#webanwendung}
+Provides the user interface for the application. Shows all movies in the user's collection and enables them to search for movies from TMDB. Also gives the user the possibility of adding and removing movies from their collection.
 
-### \<Name black box 1> {#__name_black_box_1}
+Uses the backend's REST API.
 
-*\<Purpose/Responsibility>*
+### REST API {#rest_api}
+Contains the application's business logic. Also handles the connection to TMDB and PostgreSQL DB.
+Presents a REST API and uses TMDB's REST API.
 
-*\<Interface(s)>*
 
-*\<(Optional) Quality/Performance Characteristics>*
-
-*\<(Optional) Directory/File Location>*
-
-*\<(Optional) Fulfilled Requirements>*
-
-*\<(optional) Open Issues/Problems/Risks>*
-
-### \<Name black box 2> {#__name_black_box_2}
-
-*\<black box template>*
-
-### \<Name black box n> {#__name_black_box_n}
-
-*\<black box template>*
-
-### \<Name interface 1> {#__name_interface_1}
-
-...
-
-### \<Name interface m> {#__name_interface_m}
+### Database {#database}
+Persists information about users and movies.
 
 ## Level 2 {#_level_2}
 
-### White Box *\<building block 1>* {#_white_box_emphasis_building_block_1_emphasis}
 
-*\<white box template>*
+![c4 component diagram backend](/c4Diagrams/c4-component-backend.png)
 
-### White Box *\<building block 2>* {#_white_box_emphasis_building_block_2_emphasis}
 
-*\<white box template>*
+### Movies- / UsersWeb {#web_components}
+Both classes contain the Spring REST controllers which access services containing the business logic. Be aware that to access both controllers under "/api/", a constant needs to be added at the beginning of both classes. Otherwise, it can collide with the SPA frontend when API URLs do not start with /api.
 
-...
+### UserService {#userService}
+The user service provides information about users. It uses Spring Boot Security to get the authenticated user.
 
-### White Box *\<building block m>* {#_white_box_emphasis_building_block_m_emphasis}
+### MovieService {#movieService}
+This service provides information about movies. The service uses TMDB for unknown movies and the database when the movie is persisted.
 
-*\<white box template>*
-
-## Level 3 {#_level_3}
-
-### White Box \<\_building block x.1\_\> {#_white_box_building_block_x_1}
-
-*\<white box template>*
-
-### White Box \<\_building block x.2\_\> {#_white_box_building_block_x_2}
-
-*\<white box template>*
-
-### White Box \<\_building block y.1\_\> {#_white_box_building_block_y_1}
-
-*\<white box template>*
+### TmdbMovieInformations {#tmdbMovieInformations}
+This service manages the requests to TMDB. It uses a customized REST client to access all TMDB endpoints without having to add the API key to every request manually.
