@@ -1,12 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.thro.sqs.homemoviedb</groupId>
 	<artifactId>home-movie-db</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>home-movie-db</name>
@@ -16,6 +13,11 @@
     <module>home-movie-db-frontend</module>
     <module>home-movie-db-backend</module>
   </modules>
+
+  <scm>
+    <developerConnection>scm:git:https://github.com/AlexDor18/home-movie-db.git</developerConnection>
+    <tag>1.0.0</tag>
+  </scm>
 
   <properties>
     <maven.compiler.source>21</maven.compiler.source>
@@ -106,6 +108,11 @@
                 </goals>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+            <version>3.1.1</version>
           </plugin>
         </plugins>
       </build>
