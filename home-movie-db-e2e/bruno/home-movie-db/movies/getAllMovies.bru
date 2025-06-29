@@ -1,0 +1,15 @@
+meta {
+  name: getAllMovies
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{host}}/api/movies?language=de-DE
+  body: none
+  auth: none
+}
+
+params:query {
+  language: de-DE
+}

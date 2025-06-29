@@ -1,0 +1,16 @@
+meta {
+  name: search movies
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{host}}/api/search/movies?query=Fluch der Karibik&adult=false
+  body: none
+  auth: inherit
+}
+
+params:query {
+  query: Fluch der Karibik
+  adult: false
+}

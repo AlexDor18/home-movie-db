@@ -1,0 +1,15 @@
+meta {
+  name: saveMovieById
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}/api/movies/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 974576
+}

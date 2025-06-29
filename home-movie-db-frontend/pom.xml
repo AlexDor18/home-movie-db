@@ -1,23 +1,49 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.thro.sqs.homemoviedb</groupId>
-	<artifactId>home-movie-db-frontend</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <parent>
+		<groupId>org.thro.sqs.homemoviedb</groupId>
+		<artifactId>home-movie-db</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+	</parent>
 
-  <name>home-movie-db-frontend</name>
-  <description>Web application for movie database</description>
+    <groupId>org.thro.sqs.homemoviedb</groupId>
+    <artifactId>home-movie-db-frontend</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>home-movie-db-frontend</name>
+    <description>Web application for movie database</description>
+
+    <properties>
+        <sonar.sources>src/</sonar.sources>
+        <sonar.exclusions>dist/**,build/**,src/**/*.test.*,src/tests/</sonar.exclusions>
+        <sonar.tests>src/tests/</sonar.tests>
+        <sonar.test.inclusions>src/**/*.test.*</sonar.test.inclusions>
+        <sonar.javascript.lcov.reportPaths>coverage/lcov.info</sonar.javascript.lcov.reportPaths>
+        <sonar.node.executable>/target/node/node</sonar.node.executable>
+    </properties>
 
     <build>
         <plugins>
             <plugin>
+              <artifactId>maven-clean-plugin</artifactId>
+              <version>3.5.0</version>
+              <configuration>
+                <filesets>
+                  <fileset>
+                    <directory>dist</directory>
+                    <includes>
+                      <include>**/*</include>
+                    </includes>
+                  </fileset>
+                </filesets>
+              </configuration>
+            </plugin>
+            <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.14.2</version>
+                <version>${eirslett.version}</version>
                 <executions>
                     <execution>
                         <id>install-node-and-npm</id>
@@ -25,6 +51,36 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>install packages</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-project</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>test</phase>
+                        <configuration>
+                            <arguments>run coverage</arguments>
+                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
