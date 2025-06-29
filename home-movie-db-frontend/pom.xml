@@ -4,12 +4,12 @@
     <parent>
 		<groupId>org.thro.sqs.homemoviedb</groupId>
 		<artifactId>home-movie-db</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 
     <groupId>org.thro.sqs.homemoviedb</groupId>
     <artifactId>home-movie-db-frontend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>home-movie-db-frontend</name>
