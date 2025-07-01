@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.thro.sqs.homemoviedb</groupId>
 		<artifactId>home-movie-db</artifactId>
-		<version>1.0.1</version>
+		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.thro.sqs.homemoviedb</groupId>
 	<artifactId>home-movie-db-backend</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2-SNAPSHOT</version>
 
 	<name>home-movie-db-backend</name>
 	<description>Demo project for Spring Boot</description>
@@ -25,7 +25,7 @@
 		<dependency>
 			<groupId>org.thro.sqs.homemoviedb</groupId>
 			<artifactId>home-movie-db-frontend</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2-SNAPSHOT</version>
 			<type>pom</type>
 		</dependency>
 
