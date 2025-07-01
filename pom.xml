@@ -3,7 +3,7 @@
 
   <groupId>org.thro.sqs.homemoviedb</groupId>
 	<artifactId>home-movie-db</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <packaging>pom</packaging>
 
   <name>home-movie-db</name>
@@ -16,7 +16,7 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/AlexDor18/home-movie-db.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>1.0.1</tag>
   </scm>
 
   <properties>
