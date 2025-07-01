@@ -17,25 +17,6 @@ workspace {
         homeMovieDb = softwareSystem "Home Movie DB" {
             description "Verwaltet Filme für Zuhause"
 
-            webApp = container "Webanwendung" {
-                technology "React (Frontend)"
-                description "Stellt die Benutzeroberfläche bereit"
-                
-                react = component "React" {
-                    technology "React"
-                    description "Rendering der HTML componenten"
-                }
-                
-                redux = component "Store" {
-                    technology "Redux (RTK Query)"
-                    description "Handling information and api calls"
-                }
-                
-                react -> redux "Verwendet"
-                redux -> moviesWeb "Fragt Filme ab"
-                redux -> userWeb "Fragt Benutzer ab"
-            }
-
             database = container "Datenbank" {
                 technology "PostgreSQL"
                 description "Speichert Informationen"
@@ -77,13 +58,8 @@ workspace {
                     technology "Spring Service"
                     description "Kommuniziert mit TMDB API"
                 }
-                movieMapper = component "MovieMapper" {
-                    technology "MapStruct"
-                    description "Mapppt zwischen DTOs und Nachrichten"
-                }
 
                 moviesWeb -> movieService "Verwendet"
-                moviesWeb -> movieMapper "Verwendet"
                 userWeb -> userService "Verwendet"
                 movieService -> movieRepository "Verwendet"
                 movieService -> tmdbMovieInformations "Fragt Filmdaten an"
@@ -92,6 +68,24 @@ workspace {
                 movieRepository -> database "Verwendet"
                 userRepository -> database "Verwendet"
                 tmdbMovieInformations -> tmdb "Verwendet TMDB API"
+            }
+            
+            webApp = container "Webanwendung" {
+                technology "React (Frontend)"
+                description "Stellt die Benutzeroberfläche bereit"
+                
+                react = component "React" {
+                    technology "React"
+                    description "Rendering der HTML componenten"
+                }
+                
+                redux = component "Store" {
+                    technology "Redux (RTK Query)"
+                    description "Handling information and api calls"
+                }
+                
+                react -> redux "Verwendet"
+                redux -> api "Verwendet"
             }
 
             benutzer -> webApp "Verwendet"
@@ -112,19 +106,19 @@ workspace {
         container homeMovieDb {
             include *
             autolayout lr
-            title "Containerdiagramm Backend"
+            title "Containerdiagramm Applikation"
         }
 
         component webApp {
             include *
             autolayout lr
-            title "Containerdiagram WebApp"
+            title "Containerdiagram Frontend"
         }
 
         component api {
             include *
             autolayout lr
-            title "Komponentendiagramm (API)"
+            title "Komponentendiagramm Backend"
         }
 
         theme default
