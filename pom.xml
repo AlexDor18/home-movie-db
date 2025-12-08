@@ -24,7 +24,7 @@
     <maven.compiler.target>21</maven.compiler.target>
     <maven.compiler.version>3.14.1</maven.compiler.version>
     <spring.version>3.5.6</spring.version>
-    <maven.resources.version>3.3.1</maven.resources.version>
+    <maven.resources.version>3.4.0</maven.resources.version>
     <eirslett.version>1.15.4</eirslett.version>
     <jacoco.version>0.8.13</jacoco.version>
     <org.mapstruct.version>1.6.3</org.mapstruct.version>
